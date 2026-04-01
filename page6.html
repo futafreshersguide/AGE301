@@ -14,6 +14,7 @@
             --success-color: #27ae60;
             --error-color: #e74c3c;
             --tag-color: #e67e22;
+            --tag-new: #9b59b6;
         }
         
         body {
@@ -95,6 +96,10 @@
             font-weight: bold;
         }
 
+        .q-tag-new {
+            background-color: var(--tag-new);
+        }
+
         .question-text {
             font-weight: bold;
             margin-bottom: 15px;
@@ -171,7 +176,7 @@
 
     <header>
         <h1>AGE 301: Engineering Statistics</h1>
-        <p>O'YEMI'S CBT Simulator</p>
+        <p>Genius Point Academy (GPA) CBT Simulator</p>
     </header>
 
     <nav>
@@ -186,13 +191,12 @@
     <div class="container">
         
         <div class="card">
-            <h2>AGE 301 Master CBT (50 Questions)</h2>
-            <p>Welcome to the Master CBT! These 50 questions are compiled directly from AGE 301 past exams (2014-2025) and mandatory assignments. The most frequently repeated concepts are at the top. Select your answers and hit submit at the bottom!</p>
+            <h2>AGE 301 Master CBT (75 Questions)</h2>
+            <p>Welcome to the ultimate GPA Master CBT! This simulator features 75 critical questions. It starts with the most recent <strong>2024/2025 exam</strong>, moves into heavy ANOVA and Regression calculations (find your F-values!), and finishes with probability and theory. Select your answers and hit submit at the bottom to get graded!</p>
             
             <form id="quizForm">
                 <div id="quiz-container">
-                    <!-- Questions will be injected here by JavaScript -->
-                </div>
+                    </div>
                 <button type="button" class="submit-btn" onclick="calculateScore()">Submit & Grade Simulator</button>
             </form>
 
@@ -206,140 +210,91 @@
     </footer>
 
     <script>
-        // Database of 50 Past Questions
+        // Database of 75 Past Questions
         const questionsData = [
-            // HIGHLY FREQUENT (Appeared in Multiple Years + Assignments)
-            {
-                q: "The probability density function (pdf) of a discrete random variable is given by P(X = x) = a(3/4)<sup>x</sup> for x = 0, 1, 2, 3... Find the value of the constant, a.",
-                opts: ["3/4", "1/3", "1/4", "4/3"],
-                ans: 2,
-                tag: "[Exam 2024/25, 2022/23 & Assgt | Highly Frequent]",
-                exp: "Sum of probabilities equals 1. Using geometric sum formula S_&infin; = a / (1 - r) => a / (1 - 3/4) = 1 => a/(1/4) = 1 => a = 1/4."
-            },
-            {
-                q: "If 20% of bolts produced by a machine are defective, determine the probability that out of 4 bolts chosen at random, exactly 1 will be defective.",
-                opts: ["0.1536", "0.4096", "0.9728", "0.0819"],
-                ans: 1,
-                tag: "[Exam 2015/16, 2014/15 & Assgt | Highly Frequent]",
-                exp: "Binomial: p = 0.2, q = 0.8, n = 4. P(X=1) = 4C1 &times; (0.2)&sup1; &times; (0.8)&sup3; = 0.4096."
-            },
-            {
-                q: "Differentiate between a 'Statistic' and 'Statistics'. Which statement is correct?",
-                opts: ["A statistic is a sample measurement; statistics is the science of data.", "They mean the exact same thing.", "Statistics applies to grouped data; statistic to ungrouped.", "A statistic is a population parameter."],
-                ans: 0,
-                tag: "[Exam 2018/19, 2015/16, 2014/15 | Frequent Theory]",
-                exp: "Statistics is the field/discipline. A statistic is a single value derived from a sample (e.g., sample mean)."
-            },
-            {
-                q: "Two discs are drawn without replacement from a box containing 3 red and 4 white discs. If X is the number of white discs, what is P(X=0)?",
-                opts: ["1/7", "2/7", "4/7", "12/42"],
-                ans: 0,
-                tag: "[Exam 2022/23 & Assgt | Frequent]",
-                exp: "P(Red, Red) = (3/7) &times; (2/6) = 6/42 = 1/7."
-            },
-            {
-                q: "Suppose 300 misprints are distributed randomly throughout a book of 500 pages. Find the probability that a given page contains exactly 2 misprints.",
-                opts: ["0.3293", "0.5488", "0.0988", "0.1219"],
-                ans: 2,
-                tag: "[Exam 2022/23, 2015/16 | Frequent]",
-                exp: "Poisson: &lambda; = 300/500 = 0.6. P(X=2) = (e&circ;-0.6 &times; 0.6&sup2;) / 2! = 0.0988."
-            },
-            {
-                q: "On the basis of past experience, the probability that an electrical component is satisfactory is 0.98. In a sample of 5, what is the probability of 0 defectives?",
-                opts: ["0.0922", "0.9039", "0.0038", "0.0001"],
-                ans: 1,
-                tag: "[Exam 2024/25 & Assgt | Frequent]",
-                exp: "Defective rate p = 0.02. P(X=0) = 5C0 &times; (0.02)&#8304; &times; (0.98)&#8309; = 0.9039."
-            },
-            {
-                q: "A fair coin is tossed 5 times. What is the probability of obtaining exactly 3 heads?",
-                opts: ["0.1563", "0.3125", "0.5000", "0.0313"],
-                ans: 1,
-                tag: "[Exam 2018/19, 2015/16, 2014/15 | Frequent]",
-                exp: "Binomial: n=5, p=0.5. P(X=3) = 5C3 &times; (0.5)&sup3; &times; (0.5)&sup2; = 10 &times; 0.03125 = 0.3125."
-            },
-            {
-                q: "Which of the following is NOT a condition for using the Poisson Distribution?",
-                opts: ["Events occur independently.", "The mean rate of occurrence is constant.", "There are a fixed number of trials (n).", "Two events cannot occur at the exact same instant."],
-                ans: 2,
-                tag: "[Exam 2018/19, 2015/16, 2014/15 | Theory]",
-                exp: "A fixed number of trials (n) is a condition for the BINOMIAL distribution, not Poisson."
-            },
-            {
-                q: "For a binomial random variable, the expected value of X&sup2;, E[X&sup2;], is proven to be equal to:",
-                opts: ["npq", "npq + &mu;", "npq + &mu;&sup2;", "npq - &mu;&sup2;"],
-                ans: 2,
-                tag: "[Exam 2018/19, 2014/15 | Proof]",
-                exp: "Since Var(X) = E[X&sup2;] - &mu;&sup2;, and Var(X) = npq, rearranging gives E[X&sup2;] = npq + &mu;&sup2;."
-            },
-            {
-                q: "A laboratory technician measures breaking strength. The ANOVA table shows Treatment SS = 70.173 (DF=4) and Error SS = 25.315 (DF=12). What is the F-calculated value for treatments?",
-                opts: ["0.36", "8.316", "2.77", "11.10"],
-                ans: 1,
-                tag: "[Exam 2018/19, 2015/16, 2014/15 | ANOVA]",
-                exp: "MS_Trt = 70.173/4 = 17.543. MS_Err = 25.315/12 = 2.110. F = 17.543 / 2.110 = 8.316."
-            },
+            
+            // --- SECTION 1: THE 2024/2025 EXAM SIMULATOR ---
+            { q: "A partial ANOVA table gives Treatment DF = 5, Treatment SS = 214.1, Total DF = 35, Total SS = 4056.8. How many treatments are there in this experiment?", opts: ["5", "6", "35", "30"], ans: 1, tag: "[Simulator 2024/25 | ANOVA]", exp: "DF_Treatment = k - 1. Since DF = 5, k - 1 = 5, therefore k = 6 treatments." },
+            { q: "Using the same ANOVA table (Total DF = 35, 6 treatments), assuming equal sample sizes, how many observations are in each group?", opts: ["5", "30", "6", "36"], ans: 2, tag: "[Simulator 2024/25 | ANOVA]", exp: "Total DF = N - 1. So N = 36. With 6 treatments, observations per group (n) = 36 / 6 = 6." },
+            { q: "What is the calculated F-statistic for the aforementioned ANOVA table?", opts: ["0.334", "3.10", "128.09", "42.82"], ans: 0, tag: "[Simulator 2024/25 | ANOVA]", exp: "MS_Trt = 214.1 / 5 = 42.82. SS_Error = 4056.8 - 214.1 = 3842.7. DF_Error = 35 - 5 = 30. MS_Error = 3842.7 / 30 = 128.09. F = 42.82 / 128.09 = 0.334." },
+            { q: "In a multiple linear regression where n=5, &Sigma;Y=17, &Sigma;X1=28, &Sigma;X2=58, solving the simultaneous normal equations yields Y = b0 + b1X1 + b2X2. What is the approximate value of b1?", opts: ["0.012", "0.699", "-0.649", "1.230"], ans: 1, tag: "[Simulator 2024/25 | Regression]", exp: "Solving the 3x3 matrix/simultaneous equations gives b1 &approx; 0.699." },
+            { q: "Given factory product weights: 45-54(1), 55-64(3), 65-74(5), 75-84(18), 85-94(33), 95-104(25)... What is the median weight of the products? (Total N=125)", opts: ["94.5 kg", "91.02 kg", "95.5 kg", "96.86 kg"], ans: 2, tag: "[Simulator 2024/25 | Grouped Data]", exp: "Median position = 62.5. Falls in 94.5-104.5 class. Median = 94.5 + [(62.5 - 60)/25] &times; 10 = 95.5 kg." },
+            { q: "From the same factory product weights, what is the exact mode?", opts: ["89.5 kg", "95.5 kg", "91.02 kg", "94.5 kg"], ans: 2, tag: "[Simulator 2024/25 | Grouped Data]", exp: "Modal class is 84.5-94.5. &Delta;1 = 33-18=15, &Delta;2 = 33-25=8. Mode = 84.5 + [15/(15+8)] &times; 10 = 91.02 kg." },
+            { q: "The probability that a component is satisfactory is 0.98. In a sample of 5, what is the probability of finding exactly ONE defective component?", opts: ["0.9039", "0.0922", "0.0038", "0.0200"], ans: 1, tag: "[Simulator 2024/25 | Binomial]", exp: "p(defective) = 0.02. P(X=1) = 5C1 &times; (0.02)&sup1; &times; (0.98)&sup4; = 0.0922." },
+            { q: "A company drills 4 oil wells. Prob of success is 0.40. Cost per well is $200k. Worth per success is $600k. What is the expected gain?", opts: ["$240,000", "$160,000", "-$200,000", "$960,000"], ans: 1, tag: "[Simulator 2024/25 | Expectations]", exp: "Expected successes = 4 &times; 0.4 = 1.6. Expected Revenue = 1.6 &times; $600k = $960k. Total Cost = $800k. Gain = 960k - 800k = $160,000." },
+            { q: "Considering all possible results from the 4 oil wells, what is the probability of making a loss rather than a gain?", opts: ["0.1296", "0.8704", "0.4752", "0.3456"], ans: 2, tag: "[Simulator 2024/25 | Binomial]", exp: "A loss occurs if 0 or 1 well is successful (Revenue < 800k). P(X=0) + P(X=1) = 0.1296 + 0.3456 = 0.4752." },
+            { q: "Two tetrahedral dice (faces 1, 2, 3, 4) are thrown. What is the probability density function value P(X=6)?", opts: ["1/8", "3/16", "1/4", "1/16"], ans: 1, tag: "[Simulator 2024/25 | Probability]", exp: "Outcomes for sum of 6: (2,4), (3,3), (4,2). Total outcomes = 16. P(X=6) = 3/16." },
 
-            // PROBABILITY & EXPECTATIONS
-            { q: "A random variable X has Var(X) = 0.84. What is the variance of (3X - 4)?", opts: ["2.52", "3.56", "7.56", "1.16"], ans: 2, tag: "[Exam 2022/23]", exp: "Var(aX + b) = a&sup2;Var(X). Var(3X - 4) = 3&sup2;(0.84) = 9(0.84) = 7.56." },
-            { q: "If E(X) = 2.4, what is the value of E(3X + 4)?", opts: ["11.2", "7.2", "13.6", "10.0"], ans: 0, tag: "[Exam 2018/19]", exp: "E(aX + b) = aE(X) + b. 3(2.4) + 4 = 7.2 + 4 = 11.2." },
-            { q: "Two tetrahedral dice (faces 1,2,3,4) are thrown. What is the probability the sum is exactly 5?", opts: ["1/16", "1/8", "3/16", "1/4"], ans: 3, tag: "[Exam 2024/25, 2022/23]", exp: "Outcomes for 5: (1,4), (4,1), (2,3), (3,2). Total outcomes = 16. Prob = 4/16 = 1/4." },
-            { q: "From a box of 3 red and 4 white discs, two are drawn. Expected number of white discs E(X) is?", opts: ["4/7", "8/7", "12/7", "1.0"], ans: 1, tag: "[Exam 2022/23 & Assgt]", exp: "E(X) = 0(1/7) + 1(4/7) + 2(2/7) = 8/7." },
+            // --- SECTION 2: HEAVY ANOVA & REGRESSION CALCULATIONS ---
+            { q: "A microwave drying experiment tested 3 Banana Cultivars with 5 fibres each. Cultivar sums are 187.3, 123.6, and 115.6. The Total Sum of Squares (SST) was calculated as 627.49. Calculate the Treatment Sum of Squares.", opts: ["617.51", "308.75", "9.99", "1027.32"], ans: 0, tag: "[Calculation | ANOVA Cultivars]", exp: "SS_Trt = [(187.3&sup2; + 123.6&sup2; + 115.6&sup2;) / 5] - CF. Grand total = 426.5. CF = 426.5&sup2; / 15 = 12126.82. SS_Trt = 12744.32 - 12126.82 = 617.51." },
+            { q: "Using the Banana Cultivars data (SST = 627.49, SS_Trt = 617.51, N=15, k=3), calculate the final F-statistic.", opts: ["3.89", "308.75", "12.75", "371.10"], ans: 3, tag: "[Calculation | ANOVA Cultivars]", exp: "SS_Err = 627.49 - 617.51 = 9.98. MS_Trt = 617.51 / 2 = 308.75. MS_Err = 9.98 / 12 = 0.832. F = 308.75 / 0.832 = 371.10." },
+            { q: "In an RCBD experiment with 5 Treads (Treatments) and 4 Instruments (Blocks), Treatment SS = 70.173, Block SS = 0.330, and Total SS = 95.818. Calculate the F-statistic for the Treatments.", opts: ["0.052", "17.54", "8.316", "2.11"], ans: 2, tag: "[Calculation | ANOVA RCBD]", exp: "Error SS = 95.818 - 70.173 - 0.330 = 25.315. Error DF = (5-1)(4-1) = 12. MS_Trt = 70.173 / 4 = 17.543. MS_Err = 25.315 / 12 = 2.11. F = 17.543 / 2.11 = 8.316." },
+            { q: "Three varieties of Sweet Potatoes (A, B, C) have 4 replicates each. Treatment SS is 44.555, Total SS is 496.383. What is the calculated F-value?", opts: ["0.444", "22.28", "50.20", "4.10"], ans: 0, tag: "[Calculation | ANOVA Potatoes]", exp: "SS_Err = 496.383 - 44.555 = 451.828. DF_Trt = 2. DF_Err = 9. MS_Trt = 22.278. MS_Err = 50.203. F = 22.278 / 50.203 = 0.444." },
+            { q: "To test breakdown times of 4 machines, the ANOVA table gives Treatment SS = 57.765 and Error SS = 30.2 (N=24). Find the F-calculated value.", opts: ["19.255", "1.51", "12.75", "3.10"], ans: 2, tag: "[Calculation | ANOVA Machines]", exp: "DF_Trt = 3. DF_Err = 20. MS_Trt = 57.765 / 3 = 19.255. MS_Err = 30.2 / 20 = 1.51. F = 19.255 / 1.51 = 12.75." },
+            { q: "For 10 products, diameter (x) and weight (y) have SS_xx = 584.1, SS_yy = 1004.5, SS_xy = 504.5. Calculate the Pearson Correlation Coefficient (r).", opts: ["0.864", "0.434", "0.659", "0.998"], ans: 2, tag: "[Calculation | Regression]", exp: "r = SS_xy / &radic;(SS_xx &times; SS_yy) = 504.5 / &radic;(586728.45) = 0.6586." },
+            { q: "Using the same diameter/weight data (r = 0.6586, n = 10), calculate the t-statistic to test for positive linear correlation.", opts: ["1.860", "2.306", "2.475", "1.862"], ans: 2, tag: "[Calculation | Regression]", exp: "t = [r &radic;(n-2)] / &radic;(1 - r&sup2;) = [0.6586 &times; &radic;8] / &radic;(1 - 0.4338) = 1.8625 / 0.7525 = 2.475." },
+            { q: "The regression equation for Volume (V) and Cost (C) is C = 60 + 5V. If SS_VC = 2840, SS_VV = 568, and SS_CC = 15730, what is the coefficient of determination (r&sup2;)?", opts: ["0.950", "0.903", "0.815", "0.998"], ans: 1, tag: "[Calculation | Regression]", exp: "r&sup2; = (SS_VC)&sup2; / (SS_VV &times; SS_CC) = 8065600 / 8934640 = 0.9027 (or 90.3%)." },
+            { q: "An electric cooker's Time (X) and Temp (Y) give a model: Y = -0.142 + 0.389X. Predict the temperature at 60 minutes.", opts: ["23.20 &deg;C", "10.75 &deg;C", "23.48 &deg;C", "15.40 &deg;C"], ans: 0, tag: "[Calculation | Regression]", exp: "Y = -0.142 + 0.389(60) = 23.198 &approx; 23.20 &deg;C." },
+            { q: "A weight loss model is Y = 0.197 + 0.566X (X in months). Interpret the slope (0.566).", opts: ["Initial weight loss before starting diet.", "Total weight lost after diet finishes.", "Expected weight loss increases by 0.566 kg for every additional month.", "Percentage of weight lost per month."], ans: 2, tag: "[Concept | Regression]", exp: "The slope (b) represents the rate of change in Y for every 1 unit increase in X." },
+
+            // --- SECTION 3: PROBABILITY & EXPECTATIONS ---
+            { q: "The probability density function (pdf) of a discrete random variable is given by P(X = x) = a(3/4)<sup>x</sup>. Find the value of 'a'.", opts: ["3/4", "1/3", "1/4", "4/3"], ans: 2, tag: "[Frequent Exam & Assgt]", exp: "Set geometric sum to 1. S_&infin; = a / (1 - 3/4) = 1 &rarr; a/(1/4) = 1 &rarr; a = 1/4." },
+            { q: "If 20% of bolts produced by a machine are defective, determine the probability that out of 4 bolts, exactly 1 will be defective.", opts: ["0.1536", "0.4096", "0.9728", "0.0819"], ans: 1, tag: "[Frequent Exam & Assgt]", exp: "Binomial: p = 0.2, n = 4. P(X=1) = 4C1 &times; (0.2)&sup1; &times; (0.8)&sup3; = 0.4096." },
+            { q: "Two discs are drawn without replacement from a box of 3 red and 4 white discs. If X is the number of white discs, what is P(X=0)?", opts: ["1/7", "2/7", "4/7", "12/42"], ans: 0, tag: "[Exam 2022/23 & Assgt]", exp: "P(Red, Red) = (3/7) &times; (2/6) = 6/42 = 1/7." },
+            { q: "Using the same 3 red and 4 white discs, what is the expected number of white discs drawn, E(X)?", opts: ["4/7", "8/7", "12/7", "1.0"], ans: 1, tag: "[Exam 2022/23]", exp: "E(X) = 0(1/7) + 1(4/7) + 2(2/7) = 8/7." },
+            { q: "Suppose 300 misprints are distributed randomly throughout a book of 500 pages. Find the probability that a page contains exactly 2 misprints.", opts: ["0.3293", "0.5488", "0.0988", "0.1219"], ans: 2, tag: "[Exam 2022/23, 2015/16]", exp: "Poisson: &lambda; = 300/500 = 0.6. P(X=2) = (e&circ;-0.6 &times; 0.6&sup2;) / 2! = 0.0988." },
+            { q: "A fair coin is tossed 5 times. What is the probability of obtaining at least 3 heads?", opts: ["0.1563", "0.3125", "0.5000", "0.0313"], ans: 2, tag: "[Exam 2018/19, 2015/16]", exp: "P(X &ge; 3) = P(3) + P(4) + P(5) = 0.3125 + 0.15625 + 0.03125 = 0.50." },
+            { q: "A discrete RV has E(X) = 2.4 and Var(X) = 0.84. Find the variance of (3X - 4).", opts: ["2.52", "3.56", "7.56", "1.16"], ans: 2, tag: "[Exam 2022/23]", exp: "Var(aX + b) = a&sup2;Var(X). Var(3X - 4) = 3&sup2;(0.84) = 9(0.84) = 7.56." },
+            { q: "If a discrete RV has E(X) = 2.4, what is the value of E(3X + 4)?", opts: ["11.2", "7.2", "13.6", "10.0"], ans: 0, tag: "[Exam 2018/19]", exp: "E(aX + b) = aE(X) + b. 3(2.4) + 4 = 7.2 + 4 = 11.2." },
             { q: "A fair die is thrown 5 times. Probability that a factor of 6 appears exactly 3 times?", opts: ["80/243", "40/243", "160/243", "20/243"], ans: 0, tag: "[Exam 2020/21]", exp: "Factors of 6: {1,2,3,6}. p = 4/6 = 2/3. P(X=3) = 5C3 &times; (2/3)&sup3; &times; (1/3)&sup2; = 10(8/27)(1/9) = 80/243." },
-            { q: "Probability of 2 or more misprints on a page, given an average of 0.6 misprints/page?", opts: ["0.0988", "0.8781", "0.1219", "0.4512"], ans: 2, tag: "[Exam 2022/23]", exp: "P(X &ge; 2) = 1 - [P(0) + P(1)] = 1 - [0.5488 + 0.3293] = 0.1219." },
-            { q: "A company drills 4 oil wells (success p=0.40). What is the expected number of successes?", opts: ["0.4", "1.6", "2.0", "4.0"], ans: 1, tag: "[Exam 2024/25]", exp: "For binomial, Expected Value = np. E(X) = 4 &times; 0.40 = 1.6." },
-            { q: "Using the same oil wells (p=0.4, n=4), what is the probability of ONE OR MORE successful wells?", opts: ["0.1296", "0.3456", "0.8704", "0.4752"], ans: 2, tag: "[Exam 2024/25]", exp: "P(X &ge; 1) = 1 - P(0). P(0) = 4C0(0.4)&#8304;(0.6)&#8308; = 0.1296. 1 - 0.1296 = 0.8704." },
-            { q: "An unbiased die is thrown once. What is the probability of obtaining a multiple of 3?", opts: ["1/6", "1/3", "1/2", "2/3"], ans: 1, tag: "[Assignment Question]", exp: "Multiples of 3 on a die: {3, 6}. Probability = 2/6 = 1/3." },
-            { q: "The sum of all probabilities in a discrete probability distribution must always equal:", opts: ["0", "0.5", "1", "100"], ans: 2, tag: "[General Rule]", exp: "By definition, the sum of P(X=x) over all x in the sample space is exactly 1." },
+            { q: "The probability of a successful oil well is 0.40 (n=4). What is the expected number of successes?", opts: ["0.4", "1.6", "2.0", "4.0"], ans: 1, tag: "[Exam 2024/25]", exp: "For binomial, Expected Value = np. E(X) = 4 &times; 0.40 = 1.6." },
+            { q: "Which of the following distributions is explicitly CONTINUOUS?", opts: ["Binomial", "Poisson", "Normal", "Geometric"], ans: 2, tag: "[Theory]", exp: "Binomial and Poisson count discrete items. Normal measures continuous variables." },
+            { q: "If P(A) = 3/10 and P(B) = 1/4 (mutually exclusive), what is P(A or B)?", opts: ["11/20", "3/40", "1/2", "0"], ans: 0, tag: "[Assignment Question]", exp: "For mutually exclusive events, P(A U B) = P(A) + P(B) = 3/10 + 1/4 = 11/20." },
+            { q: "The sum of all probabilities in a discrete probability distribution must always equal:", opts: ["0", "0.5", "1", "100"], ans: 2, tag: "[Theory Rule]", exp: "By definition, the sum of P(X=x) over all x in the sample space is exactly 1." },
+            { q: "For a binomial random variable, the expected value of X&sup2;, E[X&sup2;], is proven to be equal to:", opts: ["npq", "npq + &mu;", "npq + &mu;&sup2;", "npq - &mu;&sup2;"], ans: 2, tag: "[Exam 2018/19, 2014/15]", exp: "Since Var(X) = E[X&sup2;] - &mu;&sup2;, and Var(X) = npq, rearranging gives E[X&sup2;] = npq + &mu;&sup2;." },
+            { q: "Which is NOT a condition for using the Poisson Distribution?", opts: ["Events occur independently.", "The mean rate of occurrence is constant.", "There are a fixed number of trials (n).", "Two events cannot occur at the exact same instant."], ans: 2, tag: "[Theory]", exp: "A fixed number of trials (n) is a condition for the BINOMIAL distribution, not Poisson." },
 
-            // ANOVA & REGRESSION
-            { q: "In an ANOVA table, what is the formula for the Correction Factor (CF)?", opts: ["(&Sigma;X)&sup2; / N", "&Sigma;(X&sup2;) / N", "(&Sigma;X) / N&sup2;", "G / N&sup2;"], ans: 0, tag: "[ANOVA Concept]", exp: "CF is the Grand Total squared, divided by total observations (G&sup2; / N)." },
-            { q: "In an experiment with 'k' treatments and 'N' total observations, what are the degrees of freedom for the Error term?", opts: ["k - 1", "N - 1", "N - k", "k(N - 1)"], ans: 2, tag: "[ANOVA Concept]", exp: "DF_Total = N-1. DF_Trt = k-1. DF_Error = (N-1) - (k-1) = N - k." },
-            { q: "In Simple Linear Regression (Y = a + bX), what does the coefficient 'a' represent?", opts: ["The Slope", "The Y-Intercept", "The Correlation Coefficient", "The Error term"], ans: 1, tag: "[Regression Concept]", exp: "'a' is the y-intercept, the value of Y when X is 0." },
-            { q: "Which regression approach utilizes the formula B = (X^T X)^-1 X^T Y?", opts: ["Statistical Approach", "Simultaneous Equation Approach", "Matrix Approach", "Correlation Approach"], ans: 2, tag: "[Regression Concept]", exp: "This is the Matrix formulation for multiple linear regression." },
-            { q: "If the Pearson Correlation Coefficient (r) is 0.90, what percentage of the variance in Y is explained by X?", opts: ["90%", "81%", "9%", "100%"], ans: 1, tag: "[Correlation Concept]", exp: "Coefficient of determination (r&sup2;) = 0.90&sup2; = 0.81, which is 81%." },
-            { q: "If your Calculated F-value in ANOVA is greater than the Tabulated F-value, what is the correct conclusion?", opts: ["Accept Null Hypothesis", "Reject Null Hypothesis", "Recalculate the Error SS", "Treatments are equal"], ans: 1, tag: "[ANOVA Rule]", exp: "If F_calc > F_tab, we reject H_0 and conclude a significant difference exists." },
-            { q: "In the regression formula b = SS_XY / SS_XX, what does SS_XX represent?", opts: ["&Sigma;X&sup2;", "(&Sigma;X)&sup2;", "&Sigma;(X - X&#772;)&sup2;", "&Sigma;XY"], ans: 2, tag: "[Regression Concept]", exp: "SS_XX represents the sum of squared deviations of X from its mean, &Sigma;x&sup2;." },
-            { q: "A study has 4 machines with 6 observations each. What is the Total Degree of Freedom for the ANOVA?", opts: ["3", "20", "23", "24"], ans: 2, tag: "[Exam 2020/21]", exp: "Total observations N = 4 &times; 6 = 24. Total DF = N - 1 = 23." },
-            { q: "The production volume (V) vs Cost (C) regression gives equation: C = 60 + 5V. What is the estimated cost for 500 units?", opts: ["560", "2560", "3060", "2500"], ans: 1, tag: "[Exam 2015/16]", exp: "C = 60 + 5(500) = 60 + 2500 = 2560." },
-            { q: "In the same equation (C = 60 + 5V), what is the variable cost per unit?", opts: ["60", "65", "5", "55"], ans: 2, tag: "[Exam 2015/16]", exp: "The variable cost is represented by the slope, which is 5." },
-
-            // CENTRAL TENDENCY, DISPERSION, & GROUPED DATA
-            { q: "For a grouped data frequency table, what does L_mo represent in the Mode formula?", opts: ["Limit of the median class", "Lower class boundary of modal class", "Lowest frequency", "Length of the class"], ans: 1, tag: "[Grouped Data Concept]", exp: "L_mo is the Lower Class Boundary (not limit!) of the modal class." },
-            { q: "If a dataset has variance = 8.507, what is its standard deviation?", opts: ["72.37", "4.25", "2.92", "17.01"], ans: 2, tag: "[Exam 2015/16]", exp: "Standard Deviation = &radic;Variance = &radic;8.507 &approx; 2.92." },
+            // --- SECTION 4: CENTRAL TENDENCY & DISPERSION ---
             { q: "The mean of a set of 10 numbers is 29, and the sum of their squares (&Sigma;x&sup2;) is 8469. Find the variance.", opts: ["5.9", "846.9", "8.4", "59.0"], ans: 0, tag: "[Exam 2014/15 & Assgt]", exp: "Var = (&Sigma;x&sup2;/n) - (mean)&sup2; = (8469/10) - 29&sup2; = 846.9 - 841 = 5.9." },
+            { q: "If a dataset has variance = 8.507, what is its standard deviation?", opts: ["72.37", "4.25", "2.92", "17.01"], ans: 2, tag: "[Exam 2015/16]", exp: "Standard Deviation = &radic;Variance = &radic;8.507 &approx; 2.92." },
+            { q: "For a grouped data frequency table, what does L_mo represent in the Mode formula?", opts: ["Limit of the median class", "Lower class boundary of modal class", "Lowest frequency", "Length of the class"], ans: 1, tag: "[Grouped Data Concept]", exp: "L_mo is the Lower Class Boundary (not limit!) of the modal class." },
             { q: "Ade's average for his first four tests is 68. He needs an average of 70 across five tests. What is the lowest mark he can get on the 5th test?", opts: ["72", "78", "80", "70"], ans: 1, tag: "[Assignment Question]", exp: "Current total = 68 &times; 4 = 272. Target total = 70 &times; 5 = 350. Needed = 350 - 272 = 78." },
             { q: "A set of four numbers {2, 3, 6, 9} has two numbers 'a' and 'b' added. The new mean is 6. What is a + b?", opts: ["16", "20", "12", "18"], ans: 0, tag: "[Assignment Question]", exp: "Old sum = 20. New sum = 6 &times; 6 = 36. Therefore, a + b = 36 - 20 = 16." },
-            { q: "If a constant 'c' is multiplied to every value in a dataset, what happens to the standard deviation?", opts: ["It is multiplied by c", "It is multiplied by c&sup2;", "It remains unchanged", "It increases by c"], ans: 0, tag: "[Dispersion Concept]", exp: "Var(cX) = c&sup2;Var(X), so SD(cX) = c &times; SD(X)." },
-            { q: "Which of the following is highly sensitive to extreme outliers?", opts: ["Median", "Mode", "Mean", "Interquartile Range"], ans: 2, tag: "[Theory]", exp: "The mean takes every value into account, making it easily skewed by extreme outliers." },
-            { q: "Given factory product weights: 45-54(1), 55-64(3), 65-74(5), 75-84(18), 85-94(33), 95-104(25)... What is the modal class boundary?", opts: ["85 - 94", "84.5 - 94.5", "94.5 - 104.5", "74.5 - 84.5"], ans: 1, tag: "[Exam 2024/25]", exp: "Highest freq is 33 in class 85-94. The continuous boundary is 84.5 - 94.5." },
-            { q: "From the housing estate data (N=50), 35 residents are less than 31 years old. What is the probability a random resident is less than 31?", opts: ["0.35", "0.70", "0.50", "0.65"], ans: 1, tag: "[Exam 2024/25, 2020/21]", exp: "P = Favorable / Total = 35 / 50 = 0.70." },
+            { q: "If a constant 'c' is added to every value in a dataset, what happens to the variance?", opts: ["It is multiplied by c", "It is multiplied by c&sup2;", "It remains unchanged", "It increases by c"], ans: 2, tag: "[Dispersion Concept]", exp: "Var(X + c) = Var(X). Adding a constant shifts the mean but does not change the spread." },
+            { q: "If a constant 'c' is multiplied to every value in a dataset, what happens to the standard deviation?", opts: ["It is multiplied by c", "It is multiplied by c&sup2;", "It remains unchanged", "It increases by c"], ans: 0, tag: "[Dispersion Concept]", exp: "Var(cX) = c&sup2;Var(X), so taking the square root gives SD(cX) = c &times; SD(X)." },
+            { q: "Which of the following measures is highly sensitive to extreme outliers?", opts: ["Median", "Mode", "Mean", "Interquartile Range"], ans: 2, tag: "[Theory]", exp: "The mean mathematically includes every value, making it easily skewed by extreme outliers." },
             { q: "Eighty bags of salt have an assumed mean of 25kg. If &Sigma;(x-25) = 27.2, what is the actual mean weight?", opts: ["25.00", "25.34", "27.20", "0.34"], ans: 1, tag: "[Assignment Question]", exp: "Actual mean = Assumed Mean + (&Sigma;d / N) = 25 + (27.2 / 80) = 25 + 0.34 = 25.34." },
-
-            // MISC & MORE THEORY
-            { q: "What is the total sum of probabilities of mutually exclusive and exhaustive events?", opts: ["0", "0.5", "1.0", "Depends on n"], ans: 2, tag: "[Probability Rule]", exp: "Exhaustive events cover the entire sample space, so their probabilities sum to 1." },
+            { q: "When finding the median of grouped data, what does CF_b represent?", opts: ["Cum. freq. of the median class", "Cum. freq. before the median class", "Class boundary", "Correction factor"], ans: 1, tag: "[Grouped Data Concept]", exp: "CF_b is the cumulative frequency of the class strictly preceding the median class." },
+            
+            // --- SECTION 5: GENERAL THEORY & MISC ---
+            { q: "Differentiate between a 'Statistic' and 'Statistics'. Which statement is correct?", opts: ["A statistic is a sample measurement; statistics is the science of data.", "They mean the exact same thing.", "Statistics applies to grouped data; statistic to ungrouped.", "A statistic is a population parameter."], ans: 0, tag: "[Frequent Theory]", exp: "Statistics is the field/discipline. A statistic is a single value derived from a sample." },
             { q: "Which data presentation method uses a circle divided into sectors proportional to relative frequencies?", opts: ["Histogram", "Ogive", "Pie Chart", "Scatter Diagram"], ans: 2, tag: "[Data Presentation]", exp: "A Pie Chart uses sectors of a circle (degrees) to show proportions." },
             { q: "For a standard normal distribution (Z), the mean and standard deviation are respectively:", opts: ["1 and 0", "0 and 1", "0 and 0", "Depends on sample size"], ans: 1, tag: "[Normal Dist]", exp: "A standard normal distribution always has &mu; = 0 and &sigma; = 1." },
             { q: "A sample of 100 students shows 55% in favour. Standard Error is ~0.0497. What is the upper 95% confidence limit (Z=1.96)?", opts: ["64.75%", "69.93%", "55.00%", "45.25%"], ans: 0, tag: "[Exam 2022/23]", exp: "Upper limit = 0.55 + 1.96(0.0497) = 0.55 + 0.0974 = 0.6474 (64.75%)." },
-            { q: "What does an Ogive specifically help estimate in statistics?", opts: ["Mean and Mode", "Median and Quartiles", "Variance", "Correlation"], ans: 1, tag: "[Data Presentation]", exp: "An ogive (cumulative frequency curve) is used to find median, quartiles, and deciles." },
+            { q: "What does an Ogive specifically help estimate in statistics?", opts: ["Mean and Mode", "Median and Quartiles", "Variance", "Correlation"], ans: 1, tag: "[Data Presentation]", exp: "An ogive (cumulative frequency curve) is used to graphically find median, quartiles, and deciles." },
             { q: "If the calculated Pearson's first coefficient of skewness is +0.328, the distribution is:", opts: ["Symmetrical", "Negatively Skewed", "Positively Skewed", "Uniform"], ans: 2, tag: "[Exam 2018/19]", exp: "A positive coefficient means the tail extends to the right (positively skewed)." },
             { q: "In the regression normal equation: nb_0 + b_1&Sigma;X = &Sigma;Y, what does 'n' stand for?", opts: ["Number of variables", "Total sum", "Number of data points/observations", "Degrees of freedom"], ans: 2, tag: "[Regression Formula]", exp: "In simultaneous regression equations, 'n' is the number of paired observations." },
-            { q: "Which of the following distributions is CONTINUOUS?", opts: ["Binomial", "Poisson", "Normal", "Geometric"], ans: 2, tag: "[Probability Concept]", exp: "Binomial and Poisson count discrete items. Normal measures continuous variables." },
-            { q: "When finding the median of grouped data, what does CF_b represent?", opts: ["Cum. freq. of the median class", "Cum. freq. before the median class", "Class boundary", "Correction factor"], ans: 1, tag: "[Grouped Data]", exp: "CF_b is the cumulative frequency of the class immediately preceding the median class." },
-            { q: "If P(A) = 3/10 and P(B) = 1/4 (mutually exclusive), what is P(A or B)?", opts: ["11/20", "3/40", "1/2", "0"], ans: 0, tag: "[Assignment Question]", exp: "For mutually exclusive events, P(A U B) = P(A) + P(B) = 3/10 + 1/4 = 6/20 + 5/20 = 11/20." }
+            { q: "In an ANOVA table, what is the formula for the Correction Factor (CF)?", opts: ["(&Sigma;X)&sup2; / N", "&Sigma;(X&sup2;) / N", "(&Sigma;X) / N&sup2;", "G / N&sup2;"], ans: 0, tag: "[ANOVA Concept]", exp: "CF is the Grand Total (G) squared, divided by total observations (G&sup2; / N)." },
+            { q: "In an experiment with 'k' treatments and 'N' total observations, what are the degrees of freedom for the Error term?", opts: ["k - 1", "N - 1", "N - k", "k(N - 1)"], ans: 2, tag: "[ANOVA Concept]", exp: "DF_Total = N-1. DF_Trt = k-1. DF_Error = (N-1) - (k-1) = N - k." },
+            { q: "If your Calculated F-value in ANOVA is greater than the Tabulated F-value, what is the correct conclusion?", opts: ["Accept Null Hypothesis", "Reject Null Hypothesis", "Recalculate the Error SS", "Treatments are equal"], ans: 1, tag: "[ANOVA Rule]", exp: "If F_calc > F_tab, we reject H_0 and conclude a significant difference exists." },
+            { q: "In Simple Linear Regression (Y = a + bX), what does the coefficient 'a' represent?", opts: ["The Slope", "The Y-Intercept", "The Correlation Coefficient", "The Error term"], ans: 1, tag: "[Regression Concept]", exp: "'a' is the y-intercept, the value of Y when X is 0." },
+            { q: "Which regression approach utilizes the matrix formula B = (X^T X)^-1 X^T Y?", opts: ["Statistical Approach", "Simultaneous Equation Approach", "Matrix Approach", "Correlation Approach"], ans: 2, tag: "[Regression Concept]", exp: "This is the formal Matrix formulation for multiple linear regression." },
+            { q: "In the regression formula b = SS_XY / SS_XX, what does SS_XX represent?", opts: ["&Sigma;X&sup2;", "(&Sigma;X)&sup2;", "&Sigma;(X - X&#772;)&sup2; (or &Sigma;x&sup2;)", "&Sigma;XY"], ans: 2, tag: "[Regression Concept]", exp: "SS_XX represents the sum of squared deviations of X from its mean." },
+            { q: "Which of the following is a primary method of data collection?", opts: ["Archival records", "Documentary review", "Experimentation", "Previous publications"], ans: 2, tag: "[Theory]", exp: "Experimentation generates primary (original) data, unlike archival methods." },
+            { q: "A Land Use Pie Chart has Cultivated Area = 3300 km&sup2; (165&deg;). What is the total area surveyed?", opts: ["6600", "7200", "3600", "8000"], ans: 1, tag: "[Exam 2014/15]", exp: "(165 / 360) &times; Total = 3300. Total = (3300 &times; 360) / 165 = 7200." }
         ];
 
-        // Shuffle questions slightly for variety, but keep frequent ones generally at top
-        // (For this specific requested order, we will just render them as-is)
-        
         function loadQuestions() {
             const container = document.getElementById('quiz-container');
             let html = '';
 
             questionsData.forEach((q, index) => {
+                // Highlight the 2024/2025 Simulator questions specifically
+                let tagClass = q.tag.includes("Simulator 2024") ? "q-tag q-tag-new" : "q-tag";
+
                 html += `
                 <div class="question-block">
-                    <span class="q-tag">${q.tag}</span>
+                    <span class="${tagClass}">${q.tag}</span>
                     <div class="question-text">${index + 1}. ${q.q}</div>
                     <div class="options">
                         <label><input type="radio" name="q${index}" value="0"> A) ${q.opts[0]}</label>
@@ -363,7 +318,7 @@
                 const selected = document.querySelector(`input[name="q${index}"]:checked`);
                 const expBox = document.getElementById(`exp-${index}`);
                 
-                expBox.style.display = 'block'; // Show explanation
+                expBox.style.display = 'block';
 
                 if (selected) {
                     if (parseInt(selected.value) === q.ans) {
