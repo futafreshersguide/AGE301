@@ -281,7 +281,289 @@
             { q: "Which regression approach utilizes the matrix formula B = (X^T X)^-1 X^T Y?", opts: ["Statistical Approach", "Simultaneous Equation Approach", "Matrix Approach", "Correlation Approach"], ans: 2, tag: "[Regression Concept]", exp: "This is the formal Matrix formulation for multiple linear regression." },
             { q: "In the regression formula b = SS_XY / SS_XX, what does SS_XX represent?", opts: ["&Sigma;X&sup2;", "(&Sigma;X)&sup2;", "&Sigma;(X - X&#772;)&sup2; (or &Sigma;x&sup2;)", "&Sigma;XY"], ans: 2, tag: "[Regression Concept]", exp: "SS_XX represents the sum of squared deviations of X from its mean." },
             { q: "Which of the following is a primary method of data collection?", opts: ["Archival records", "Documentary review", "Experimentation", "Previous publications"], ans: 2, tag: "[Theory]", exp: "Experimentation generates primary (original) data, unlike archival methods." },
-            { q: "A Land Use Pie Chart has Cultivated Area = 3300 km&sup2; (165&deg;). What is the total area surveyed?", opts: ["6600", "7200", "3600", "8000"], ans: 1, tag: "[Exam 2014/15]", exp: "(165 / 360) &times; Total = 3300. Total = (3300 &times; 360) / 165 = 7200." }
+            { q: "A Land Use Pie Chart has Cultivated Area = 3300 km&sup2; (165&deg;). What is the total area surveyed?", opts: ["6600", "7200", "3600", "8000"], ans: 1, tag: "[Exam 2014/15]", exp: "(165 / 360) &times; Total = 3300. Total = (3300 &times; 360) / 165 = 7200." },
+                        // --- SECTION 6: THE ASSIGNMENT & EXAM EXTENSION (40 QUESTIONS) ---
+            { 
+                q: "If the probability of finding 0 defectives in a sample of 12 doughnuts is 0.06872, what is the probability 'p' that a single doughnut is defective?", 
+                opts: ["0.068", "0.20", "0.80", "0.12"], 
+                ans: 1, 
+                tag: "[Assignment Question | Binomial]", 
+                exp: "P(X=0) = 12C0 &times; p&deg; &times; (1-p)&sup1;&sup2; = 0.06872. Solving (1-p)&sup1;&sup2; = 0.06872 gives 1-p = 0.8. Therefore, p = 0.2." 
+            },
+            { 
+                q: "Using p=0.2 for defective doughnuts, what is the expected number of defectives in a sample of 12?", 
+                opts: ["2.0", "2.4", "1.2", "0.24"], 
+                ans: 1, 
+                tag: "[Assignment Question | Expectations]", 
+                exp: "For a binomial distribution, Expected Value E(x) = np. E(x) = 12 &times; 0.2 = 2.4." 
+            },
+            { 
+                q: "Eighty bags of salt have an assumed mean weight of 25kg. If &Sigma;(x-25) = 27.2, calculate the actual mean weight.", 
+                opts: ["27.20 kg", "25.34 kg", "25.00 kg", "52.20 kg"], 
+                ans: 1, 
+                tag: "[Assignment Question | Assumed Mean]", 
+                exp: "Actual Mean = Assumed Mean + (&Sigma;d / n) = 25 + (27.2 / 80) = 25 + 0.34 = 25.34 kg." 
+            },
+            { 
+                q: "For the same 80 bags of salt, if &Sigma;(x-25)&sup2; = 85.1, what is the standard deviation?", 
+                opts: ["1.06 kg", "0.85 kg", "0.97 kg", "1.15 kg"], 
+                ans: 2, 
+                tag: "[Assignment Question | Dispersion]", 
+                exp: "Variance = (&Sigma;d&sup2; / n) - (&Sigma;d / n)&sup2; = (85.1/80) - (0.34)&sup2; = 1.06375 - 0.1156 = 0.94815. SD = &radic;0.94815 &approx; 0.97 kg." 
+            },
+            { 
+                q: "Let M be the set of integers from 1 to 20. If a number is picked at random, what is the probability it is NOT a multiple of 4?", 
+                opts: ["1/4", "3/4", "1/5", "4/5"], 
+                ans: 1, 
+                tag: "[Assignment Question | Probability]", 
+                exp: "Multiples of 4 between 1 and 20 are {4, 8, 12, 16, 20} (5 numbers). P(multiple) = 5/20 = 1/4. P(NOT multiple) = 1 - 1/4 = 3/4." 
+            },
+            { 
+                q: "A fair die is thrown. What is the probability that the number obtained is a factor of 6?", 
+                opts: ["1/2", "1/3", "2/3", "5/6"], 
+                ans: 2, 
+                tag: "[Assignment Question | Probability]", 
+                exp: "Factors of 6 on a die are {1, 2, 3, 6} (4 numbers). Probability = 4/6 = 2/3." 
+            },
+            { 
+                q: "In an assumed mean calculation, if Assumed Mean (A) = 35, class width (c) = 5, &Sigma;f = 25, and &Sigma;fu = -9, find the actual mean.", 
+                opts: ["33.2", "36.8", "34.1", "35.9"], 
+                ans: 0, 
+                tag: "[Assignment Question | Mean]", 
+                exp: "Mean = A + [(&Sigma;fu / &Sigma;f) &times; c] = 35 + [(-9 / 25) &times; 5] = 35 - 1.8 = 33.2." 
+            },
+            { 
+                q: "Two discs are drawn without replacement from a box of 3 red and 4 white discs. Let X be the number of RED discs drawn. Find E(X).", 
+                opts: ["8/7", "6/7", "1", "12/49"], 
+                ans: 1, 
+                tag: "[Assignment Question | Expectations]", 
+                exp: "P(0 red) = 12/42. P(1 red) = 24/42. P(2 red) = 6/42. E(X) = 0(12/42) + 1(24/42) + 2(6/42) = 36/42 = 6/7." 
+            },
+            { 
+                q: "For the same box of 3 red and 4 white discs, what is the probability of drawing exactly two RED discs without replacement?", 
+                opts: ["1/7", "2/7", "3/7", "4/7"], 
+                ans: 0, 
+                tag: "[Assignment Question | Probability]", 
+                exp: "P(Red and Red) = (3/7) &times; (2/6) = 6/42 = 1/7." 
+            },
+            { 
+                q: "The mean time to complete an exam is 50.6 mins with a standard deviation of 6 mins. For a random sample of 49 students, calculate the Standard Error of the mean.", 
+                opts: ["6.000", "0.122", "0.857", "1.200"], 
+                ans: 2, 
+                tag: "[Exam 2022/23 | Normal Dist]", 
+                exp: "Standard Error (SE) = &sigma; / &radic;n = 6 / &radic;49 = 6 / 7 &approx; 0.857." 
+            },
+            { 
+                q: "Using the Standard Error of 0.857 (mean = 50.6), find the Z-score for a sample mean time of 53 minutes.", 
+                opts: ["-2.80", "2.80", "0.40", "1.55"], 
+                ans: 1, 
+                tag: "[Exam 2022/23 | Normal Dist]", 
+                exp: "Z = (X - &mu;) / SE = (53 - 50.6) / 0.857 = 2.4 / 0.857 &approx; 2.80." 
+            },
+            { 
+                q: "If the Z-score for an exam time is 2.80, what is the probability that the mean time is GREATER than 53 minutes? (Given Area to the left of Z=2.8 is 0.9974)", 
+                opts: ["0.9974", "0.0026", "0.0260", "0.9740"], 
+                ans: 1, 
+                tag: "[Exam 2022/23 | Normal Dist]", 
+                exp: "P(Z > 2.80) = 1 - P(Z < 2.80) = 1 - 0.9974 = 0.0026." 
+            },
+            { 
+                q: "What Z-value is used to construct a 99.73% confidence interval for a proportion?", 
+                opts: ["1.96", "2.58", "3.00", "1.64"], 
+                ans: 2, 
+                tag: "[Exam 2022/23 | Confidence Interval]", 
+                exp: "99.73% corresponds to exactly 3 standard deviations from the mean based on the empirical rule. Thus, Z = 3.00." 
+            },
+            { 
+                q: "Three brothers A, B, and C watch a film with independent probabilities 1/4, 1/3, and 2/5 respectively. What is the expected number of brothers who watch the film?", 
+                opts: ["1.0", "59/60", "1/60", "2.0"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Expectations]", 
+                exp: "By linearity of expectation, E(Total) = E(A) + E(B) + E(C) = 1/4 + 1/3 + 2/5 = 15/60 + 20/60 + 24/60 = 59/60." 
+            },
+            { 
+                q: "Five specimens of steel cable are tested. Force (x) sum is 10, Elongation (y) sum is 27.5. What is the mean of x (x&#772;) and y (y&#772;)?", 
+                opts: ["x&#772;=2, y&#772;=5.5", "x&#772;=5, y&#772;=2", "x&#772;=2, y&#772;=27.5", "x&#772;=10, y&#772;=5.5"], 
+                ans: 0, 
+                tag: "[Exam 2018/19 | Regression Prep]", 
+                exp: "x&#772; = &Sigma;x / n = 10 / 5 = 2. y&#772; = &Sigma;y / n = 27.5 / 5 = 5.5." 
+            },
+            { 
+                q: "For the steel cable data, SS_xx = 2.5 and SS_xy = 6.95. Calculate the slope (&beta;<sub>1</sub>) of the regression line.", 
+                opts: ["0.36", "2.78", "5.50", "3.47"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Regression Slope]", 
+                exp: "&beta;<sub>1</sub> = SS_xy / SS_xx = 6.95 / 2.5 = 2.78." 
+            },
+            { 
+                q: "If the slope (&beta;<sub>1</sub>) is 2.78, x&#772; = 2, and y&#772; = 5.5, find the intercept (&beta;<sub>0</sub>) for the equation Y = &beta;<sub>0</sub> + &beta;<sub>1</sub>x.", 
+                opts: ["0.06", "-0.06", "11.06", "5.50"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Regression Intercept]", 
+                exp: "&beta;<sub>0</sub> = y&#772; - &beta;<sub>1</sub>x&#772; = 5.5 - (2.78 &times; 2) = 5.5 - 5.56 = -0.06." 
+            },
+            { 
+                q: "Using the steel cable model Y = -0.06 + 2.78x, predict the elongation for an applied force of 1.2.", 
+                opts: ["3.396", "3.276", "3.456", "2.720"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Regression Prediction]", 
+                exp: "Y = -0.06 + 2.78(1.2) = -0.06 + 3.336 = 3.276." 
+            },
+            { 
+                q: "Given SS_xy = 6.95, SS_xx = 2.5, and SS_yy = 19.52, calculate the coefficient of determination (r&sup2;).", 
+                opts: ["0.995", "0.989", "0.950", "0.890"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Regression]", 
+                exp: "r&sup2; = (SS_xy)&sup2; / (SS_xx &times; SS_yy) = 48.3025 / 48.8 = 0.9898." 
+            },
+            { 
+                q: "Three sets of numbers have means of 4, 5, and 6, and sample sizes of 10, 15, and 20 respectively. Find the combined mean.", 
+                opts: ["5.00", "5.22", "5.50", "4.88"], 
+                ans: 1, 
+                tag: "[Exam 2015/16 | Combined Mean]", 
+                exp: "Combined Mean = &Sigma;(nx) / &Sigma;n = ((10&times;4) + (15&times;5) + (20&times;6)) / (10+15+20) = (40 + 75 + 120) / 45 = 235 / 45 &approx; 5.22." 
+            },
+            { 
+                q: "A random variable Y is defined as 2Y = X - 18. If E(Y) = 2/15, what is E(X)?", 
+                opts: ["18.27", "17.73", "18.00", "36.27"], 
+                ans: 0, 
+                tag: "[Exam 2014/15 | Expectations]", 
+                exp: "Rearranging gives X = 2Y + 18. E(X) = 2E(Y) + 18 = 2(2/15) + 18 = 4/15 + 18 = 18.267." 
+            },
+            { 
+                q: "If Var(Y) = 506/225, what is the variance of X, where X = 2Y + 18?", 
+                opts: ["4.50", "8.996", "17.99", "2.25"], 
+                ans: 1, 
+                tag: "[Exam 2014/15 | Expectations]", 
+                exp: "Var(X) = Var(2Y + 18) = 2&sup2;Var(Y) = 4 &times; (506/225) = 2024 / 225 &approx; 8.996." 
+            },
+            { 
+                q: "A set of four numbers has a sum of 20. If two numbers, 'a' and 'b', are added to the set and the new mean becomes 6, what is the value of a + b?", 
+                opts: ["12", "16", "22", "36"], 
+                ans: 1, 
+                tag: "[Assignment Question | Mean Properties]", 
+                exp: "New total numbers = 4 + 2 = 6. New sum = 6 &times; 6 = 36. Since the old sum was 20, a + b = 36 - 20 = 16." 
+            },
+            { 
+                q: "A random sample of 400 items shows 1% are defective. The expected proportion p is 0.01. What is the standard deviation of this proportion?", 
+                opts: ["0.005", "0.010", "0.050", "0.099"], 
+                ans: 0, 
+                tag: "[Exam 2020/21 | Std Dev of Proportion]", 
+                exp: "SD of proportion = &radic;(pq / n) = &radic;(0.01 &times; 0.99 / 400) = &radic;(0.00002475) &approx; 0.00497 (or 0.005)." 
+            },
+            { 
+                q: "The method of least squares minimizes the sum of the squares of the:", 
+                opts: ["X variables", "Y variables", "Residuals (Errors)", "Means"], 
+                ans: 2, 
+                tag: "[Theory | Regression]", 
+                exp: "Least squares regression minimizes the vertical distance (residuals or errors) between the actual data points and the regression line." 
+            },
+            { 
+                q: "A continuous random variable differs from a discrete random variable in that:", 
+                opts: ["It can take any fractional value within a range", "It only takes whole numbers", "Its probabilities sum to greater than 1", "It cannot be graphed"], 
+                ans: 0, 
+                tag: "[Theory | Random Variables]", 
+                exp: "Continuous variables (like time, weight) can take infinite possible values within an interval, while discrete variables are countable whole numbers." 
+            },
+            { 
+                q: "If &Sigma;(X - X&#772;)&sup2; = 1500 and n = 9, what is the sample variance (s&sup2;)?", 
+                opts: ["166.67", "187.50", "150.00", "120.50"], 
+                ans: 1, 
+                tag: "[Calculation | Variance]", 
+                exp: "Sample variance divides by (n - 1). s&sup2; = 1500 / 8 = 187.50." 
+            },
+            { 
+                q: "In an ANOVA test, the 'Error Sum of Squares' is synonymous with:", 
+                opts: ["Between-groups SS", "Within-groups SS", "Total SS", "Correction Factor"], 
+                ans: 1, 
+                tag: "[Theory | ANOVA]", 
+                exp: "Error SS measures the natural variance occurring 'within' each specific treatment group, distinct from the variance 'between' the groups." 
+            },
+            { 
+                q: "If you have 4 treatments and a total of 20 observations in a completely randomized design, the F-statistic will have degrees of freedom:", 
+                opts: ["(4, 20)", "(3, 16)", "(3, 19)", "(4, 16)"], 
+                ans: 1, 
+                tag: "[Calculation | ANOVA DF]", 
+                exp: "Numerator DF = k - 1 = 4 - 1 = 3. Denominator DF = N - k = 20 - 4 = 16. The degrees of freedom are (3, 16)." 
+            },
+            { 
+                q: "For a Poisson process, if the average breakdown rate is 4 per month (&lambda;=4), what is the probability of exactly 0 breakdowns?", 
+                opts: ["e^-4", "4e^-4", "e^4", "0.4"], 
+                ans: 0, 
+                tag: "[Concept | Poisson]", 
+                exp: "P(X=0) = (e^-&lambda; &times; &lambda;^0) / 0! = (e^-4 &times; 1) / 1 = e^-4." 
+            },
+            { 
+                q: "In a grouped data frequency table, the 'class midpoint' (x) is calculated by:", 
+                opts: ["Upper limit - Lower limit", "(Upper boundary + Lower boundary) / 2", "Frequency / Total Frequency", "Upper boundary - Lower boundary"], 
+                ans: 1, 
+                tag: "[Theory | Grouped Data]", 
+                exp: "The class midpoint is the exact mathematical center of the class, found by averaging the boundaries or the limits." 
+            },
+            { 
+                q: "Pearson's second coefficient of skewness uses which measure of central tendency in its numerator alongside the mean?", 
+                opts: ["Mode", "Median", "Harmonic Mean", "Geometric Mean"], 
+                ans: 1, 
+                tag: "[Formula | Skewness]", 
+                exp: "Pearson's Second Coefficient = 3 &times; (Mean - Median) / Standard Deviation." 
+            },
+            { 
+                q: "A pie chart has a total area representing 7200 km&sup2;. If the 'Forest' sector represents 1520 km&sup2;, what is its central angle?", 
+                opts: ["152&deg;", "76&deg;", "45&deg;", "90&deg;"], 
+                ans: 1, 
+                tag: "[Calculation | Pie Chart]", 
+                exp: "Angle = (Value / Total) &times; 360&deg; = (1520 / 7200) &times; 360 = 76&deg;." 
+            },
+            { 
+                q: "What does E[S&sup2;] equal for a random sample drawn from a population with variance &sigma;&sup2;?", 
+                opts: ["&sigma;", "&sigma;&sup2;/n", "&sigma;&sup2;", "n&sigma;&sup2;"], 
+                ans: 2, 
+                tag: "[Proof | Variance]", 
+                exp: "The sample variance S&sup2; (using n-1) is an unbiased estimator of the population variance, meaning E[S&sup2;] = &sigma;&sup2;." 
+            },
+            { 
+                q: "If P(A) = 0.3, P(B) = 0.4, and events A and B are mutually exclusive, what is the probability of A and B occurring simultaneously, P(A &cap; B)?", 
+                opts: ["0.12", "0.7", "0", "1.0"], 
+                ans: 2, 
+                tag: "[Theory | Probability]", 
+                exp: "By definition, mutually exclusive events cannot happen at the same time, so their intersection is 0." 
+            },
+            { 
+                q: "In a 3x4 Randomized Complete Block Design (3 treatments, 4 blocks), what is the Error Degree of Freedom?", 
+                opts: ["12", "6", "11", "7"], 
+                ans: 1, 
+                tag: "[Calculation | RCBD ANOVA]", 
+                exp: "In an RCBD, DF_Error = (Treatments - 1)(Blocks - 1) = (3 - 1)(4 - 1) = 2 &times; 3 = 6." 
+            },
+            { 
+                q: "A linear regression line (Line of Best Fit) will always mathematically pass through which specific point?", 
+                opts: ["(0, 0)", "(x&#772;, y&#772;)", "(0, y-intercept)", "Both B and C"], 
+                ans: 3, 
+                tag: "[Theory | Regression Line]", 
+                exp: "The line of best fit always passes through the mean of x and mean of y (x&#772;, y&#772;), and crosses the y-axis at the intercept (0, a)." 
+            },
+            { 
+                q: "Which formula correctly represents the computational 'shortcut' method for calculating the Sum of Squares (SS_xx) of ungrouped data?", 
+                opts: ["(&Sigma;x&sup2; / n) - (x&#772;)&sup2;", "(&Sigma;x / n)&sup2;", "&Sigma;(x - x&#772;)&sup2;", "&Sigma;x&sup2; - [(&Sigma;x)&sup2; / n]"], 
+                ans: 3, 
+                tag: "[Formula | Sum of Squares]", 
+                exp: "SS_xx = &Sigma;X&sup2; - [(&Sigma;X)&sup2; / n]. This avoids messy decimals from the mean." 
+            },
+            { 
+                q: "Which statistical tool helps determine if the variability BETWEEN different machines is significantly greater than the variability occurring purely BY CHANCE?", 
+                opts: ["Binomial Theorem", "Linear Regression", "Analysis of Variance (ANOVA)", "Poisson Distribution"], 
+                ans: 2, 
+                tag: "[Theory | ANOVA Application]", 
+                exp: "ANOVA tests if the variance between treatments (machines) is large enough compared to the natural error variance to be deemed significant." 
+            },
+            { 
+                q: "What is the primary condition for employing the Poisson approximation to the Binomial distribution?", 
+                opts: ["'n' is very large and 'p' is very small", "'n' is small and 'p' is large", "'n' and 'p' are both equal to 0.5", "'n' must be infinity"], 
+                ans: 0, 
+                tag: "[Theory | Probability Models]", 
+                exp: "Poisson approximates Binomial effectively when the sample size (n) is large (>50) and the probability of success (p) is rare (<0.1)." 
+                }
+            
         ];
 
         function loadQuestions() {
