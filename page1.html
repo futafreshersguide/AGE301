@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: Intro to Statistics</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics by O'yemi</h1>
+        <p>Comprehensive Summary, Hints, & Practice</p>
+    </header>
+
+    <nav>
+        <a href="page1.html" class="active">1. Intro to Statistics</a>
+        <a href="page2.html">2. Central Tendency & Dispersion</a>
+        <a href="page3.html">3. Probability Distributions</a>
+        <a href="page4.html">4. Correlation & Regression</a>
+        <a href="page5.html">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>1. Introduction to Statistics</h2>
+            <p>Before diving into complex formulas and engineering applications, it is crucial to understand the foundational terminology and how data is sourced and presented. These are common 2-to-4 mark theory questions in AGE 301 exams.</p>
+        </div>
+
+        <div class="card">
+            <h2>"Statistics" vs. "Statistic"</h2>
+            <p>It is easy to mix these up, but examiners specifically look for the distinction between the field of study and the numerical measurement.</p>
+            
+            <div class="highlight">
+                <h3>Statistics (Plural / The Field)</h3>
+                <p>This is the scientific discipline that deals with the <strong>collection, organization, analysis, interpretation, and presentation</strong> of data. It is the broad subject you are currently studying.</p>
+            </div>
+
+            <div class="highlight">
+                <h3>A Statistic (Singular / The Measurement)</h3>
+                <p>This is a single numerical value calculated from a <strong>sample</strong>. It is used to estimate a characteristic of a whole population (which is called a <em>parameter</em>). <br><br>
+                <em>Examples:</em> The sample mean (x̄), the sample standard deviation (s), or a sample variance.</p>
+            </div>
+            
+            <h3>Limitations of Statistics to Note:</h3>
+            <ul>
+                <li>It deals with aggregates of facts, not isolated individual cases.</li>
+                <li>It is generally only applicable to quantitative data (numbers), not qualitative characteristics (unless quantified).</li>
+                <li>Statistical laws are probabilistic; they are true on average or in the long run, not exact certainties.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Methods of Collecting Data</h2>
+            <p>Data collection is categorized into Primary (data you collect yourself) and Secondary (data collected by someone else).</p>
+            
+            <ul>
+                <li><strong>Observation (Primary):</strong> Directly observing and recording events as they happen without intervention (e.g., counting the number of defective bolts coming off an assembly line).</li>
+                <li><strong>Experimentation (Primary):</strong> Conducting controlled tests to determine cause-and-effect relationships (e.g., the microwave-convective dryer experiment testing banana cultivars).</li>
+                <li><strong>Surveys/Questionnaires (Primary):</strong> Gathering data by asking people questions directly (e.g., polling students about a proposed loan scheme).</li>
+                <li><strong>Archival/Documentary (Secondary):</strong> Extracting data from existing records, databases, or previous studies (e.g., looking at past machine downtime logs).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Methods of Representing Data</h2>
+            <p>Once data is collected, it must be presented logically. For AGE 301, you must be familiar with constructing these from raw data:</p>
+            
+            <ul>
+                <li><strong>Tabular Presentation:</strong> Organizing data into rows and columns. 
+                    <ul>
+                        <li><em>Example:</em> Frequency Distribution Tables showing class intervals, midpoints, and frequencies.</li>
+                    </ul>
+                </li>
+                <li><strong>Graphical Presentation:</strong> Visual representation of data to show trends and distributions.
+                    <ul>
+                        <li><em>Histograms:</em> Bars showing frequency of continuous data class intervals (no gaps between bars).</li>
+                        <li><em>Bar Charts:</em> Bars showing frequencies of discrete categories (gaps between bars).</li>
+                        <li><em>Pie Charts:</em> Circular charts divided into sectors based on relative frequency or degrees (Frequency / Total &times; 360&deg;).</li>
+                        <li><em>Ogives:</em> Smoothed cumulative frequency polygons used to estimate medians and quartiles.</li>
+                        <li><em>Scatter Diagrams:</em> Plotting points on an X-Y axis to observe correlations.</li>
+                    </ul>
+                </li>
+                <li><strong>Textual Presentation:</strong> Summarizing the data findings in written paragraphs.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students| Engineered by O'yemi(07050376975) | AGE 301 Survival Guide</p>
+    </footer>
+
+</body>
+</html>
