@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: Correlation & Regression</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --warning-color: #e74c3c;
+            --success-color: #27ae60;
+            --highlight-color: #f1c40f;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .formula-box {
+            background-color: #fdfbf7;
+            border: 1px solid #e1d8c1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            color: #8a6d3b;
+            overflow-x: auto;
+        }
+
+        .hint-box {
+            background-color: #ffeaea;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .important-box {
+            background-color: #fff9e6;
+            border-left: 4px solid var(--highlight-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics</h1>
+        <p>Comprehensive Summary, Hints, & Practice</p>
+    </header>
+
+    <nav>
+        <a href="page1.html">1. Intro to Statistics</a>
+        <a href="page2.html">2. Central Tendency & Dispersion</a>
+        <a href="page3.html">3. Probability Distributions</a>
+        <a href="page4.html" class="active">4. Correlation & Regression</a>
+        <a href="page5.html">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>Correlation vs. Regression</h2>
+            <p>While often taught together, they serve different purposes:</p>
+            <ul>
+                <li><strong>Correlation</strong> measures the strength and direction of the linear relationship between two variables. (Does X increase when Y increases?)</li>
+                <li><strong>Regression</strong> creates a mathematical model (an equation) to predict the value of a dependent variable (Y) based on an independent variable (X).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>The Big Confusion: Capital X, Y vs. Small x, y</h2>
+            <p>In AGE 301, many students lose marks because they confuse the raw data with the deviations. Here is the golden rule:</p>
+            
+            <div class="important-box">
+                <h3>Capital X and Y (Raw Data)</h3>
+                <p>These are the exact numbers given to you in the exam question table. <br>
+                Example: X = 10, Y = 50.</p>
+
+                <h3>Small x and y (Deviations from the Mean)</h3>
+                <p>Small letters represent the difference between the raw data and their average (mean).<br>
+                <strong>x = X - X&#772;</strong> (Raw X minus Mean of X)<br>
+                <strong>y = Y - Y&#772;</strong> (Raw Y minus Mean of Y)</p>
+            </div>
+
+            <p>Why does this matter? Because the formulas for Sum of Squares (SS) are much simpler to write using small letters:</p>
+            <ul>
+                <li><strong>SS<sub>XX</sub></strong> = &Sigma;(X - X&#772;)&sup2; = <strong>&Sigma;x&sup2;</strong></li>
+                <li><strong>SS<sub>YY</sub></strong> = &Sigma;(Y - Y&#772;)&sup2; = <strong>&Sigma;y&sup2;</strong></li>
+                <li><strong>SS<sub>XY</sub></strong> = &Sigma;(X - X&#772;)(Y - Y&#772;) = <strong>&Sigma;xy</strong></li>
+            </ul>
+
+            <div class="hint-box">
+                <strong>Exam Shortcut:</strong> Calculating small x and y for every row is tedious and prone to rounding errors. Use the computational formulas with Capital X and Y instead!
+                <br><br>
+                <strong>Computational Formulas (Use these in the exam!):</strong><br>
+                SS<sub>XX</sub> = &Sigma;X&sup2; - [(&Sigma;X)&sup2; / n]<br>
+                SS<sub>YY</sub> = &Sigma;Y&sup2; - [(&Sigma;Y)&sup2; / n]<br>
+                SS<sub>XY</sub> = &Sigma;XY - [(&Sigma;X)(&Sigma;Y) / n]
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Pearson Correlation Coefficient (r)</h2>
+            <p>This value ranges from -1 to +1. <br>
+            +1 is a perfect positive correlation, -1 is a perfect negative correlation, and 0 means no linear correlation.</p>
+            
+            <div class="formula-box">r = SS<sub>XY</sub> / &radic;(SS<sub>XX</sub> &times; SS<sub>YY</sub>)</div>
+            
+            <h3>Coefficient of Determination (r&sup2;)</h3>
+            <p>This tells you the <em>percentage of variance</em> in the dependent variable (Y) that is explained by the independent variable (X). If r = 0.9, then r&sup2; = 0.81 (or 81%).</p>
+        </div>
+
+        <div class="card">
+            <h2>Three Approaches to Regression</h2>
+            <p>Regression finds the "Line of Best Fit." http://googleusercontent.com/image_content/307
+
+ The equation is usually written as: <strong>Y&#770; = a + bX</strong> (or Y&#770; = &beta;<sub>0</sub> + &beta;<sub>1</sub>X).</p>
+
+            <h3>1. The Statistical / Formula Approach (Simple Linear Regression)</h3>
+            <p>Used when you have only ONE independent variable (X).</p>
+            <ul>
+                <li><strong>Step 1: Find the Slope (b or &beta;<sub>1</sub>)</strong>
+                    <div class="formula-box">b = SS<sub>XY</sub> / SS<sub>XX</sub></div>
+                </li>
+                <li><strong>Step 2: Find the Y-Intercept (a or &beta;<sub>0</sub>)</strong>
+                    <div class="formula-box">a = Y&#772; - b(X&#772;)</div>
+                </li>
+            </ul>
+
+            <h3>2. The Simultaneous Equation Approach (Multiple Linear Regression)</h3>
+            <p>Used when you have multiple independent variables (e.g., X<sub>1</sub>, X<sub>2</sub>) like in the 2024/2025 AGE 301 exam. The model is <strong>Y&#770; = b<sub>0</sub> + b<sub>1</sub>X<sub>1</sub> + b<sub>2</sub>X<sub>2</sub></strong>.</p>
+            <p>You must construct and solve these three "Normal Equations" simultaneously:</p>
+            <div class="formula-box">
+                1) nb<sub>0</sub> + b<sub>1</sub>&Sigma;X<sub>1</sub> + b<sub>2</sub>&Sigma;X<sub>2</sub> = &Sigma;Y<br>
+                2) b<sub>0</sub>&Sigma;X<sub>1</sub> + b<sub>1</sub>&Sigma;X<sub>1</sub>&sup2; + b<sub>2</sub>&Sigma;X<sub>1</sub>X<sub>2</sub> = &Sigma;X<sub>1</sub>Y<br>
+                3) b<sub>0</sub>&Sigma;X<sub>2</sub> + b<sub>1</sub>&Sigma;X<sub>1</sub>X<sub>2</sub> + b<sub>2</sub>&Sigma;X<sub>2</sub>&sup2; = &Sigma;X<sub>2</sub>Y
+            </div>
+            <p><em>Hint: Create a large table to find all these sums (&Sigma;), plug them into the equations, and solve using substitution, elimination, or your scientific calculator's equation solver.</em></p>
+
+            <h3>3. The Matrix Approach</h3>
+            <p>An advanced, elegant way to solve multiple regression without messy simultaneous equations. It uses matrices to find the coefficients vector <strong>B</strong> (which contains b<sub>0</sub>, b<sub>1</sub>, b<sub>2</sub>, etc.).</p>
+            <div class="formula-box">B = (X<sup>T</sup>X)<sup>-1</sup> X<sup>T</sup>Y</div>
+            <p>Where:<br>
+            <strong>X</strong> is the matrix of independent variables (with a column of 1s for the intercept).<br>
+            <strong>Y</strong> is the column vector of the dependent variable.<br>
+            <strong>X<sup>T</sup></strong> is the transpose of the X matrix.<br>
+            <strong>(X<sup>T</sup>X)<sup>-1</sup></strong> is the inverse of the multiplied matrices.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students | AGE 301 Survival Guide</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; color: #bdc3c7;">Curated and Developed by <strong>Abideen Yakub O'yemi (07050376975)</strong></p>
+    </footer>
+
+</body>
+</html>
