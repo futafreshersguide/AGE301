@@ -224,7 +224,7 @@
             { q: "A company drills 4 oil wells. Prob of success is 0.40. Cost per well is $200k. Worth per success is $600k. What is the expected gain?", opts: ["$240,000", "$160,000", "-$200,000", "$960,000"], ans: 1, tag: "[Simulator 2024/25 | Expectations]", exp: "Expected successes = 4 &times; 0.4 = 1.6. Expected Revenue = 1.6 &times; $600k = $960k. Total Cost = $800k. Gain = 960k - 800k = $160,000." },
             { q: "Considering all possible results from the 4 oil wells, what is the probability of making a loss rather than a gain?", opts: ["0.1296", "0.8704", "0.4752", "0.3456"], ans: 2, tag: "[Simulator 2024/25 | Binomial]", exp: "A loss occurs if 0 or 1 well is successful (Revenue < 800k). P(X=0) + P(X=1) = 0.1296 + 0.3456 = 0.4752." },
             { q: "Two tetrahedral dice (faces 1, 2, 3, 4) are thrown. What is the probability density function value P(X=6)?", opts: ["1/8", "3/16", "1/4", "1/16"], ans: 1, tag: "[Simulator 2024/25 | Probability]", exp: "Outcomes for sum of 6: (2,4), (3,3), (4,2). Total outcomes = 16. P(X=6) = 3/16." },
-                        // --- REPLACEMENT QUESTIONS: GROUPED DATA, ANOVA & REGRESSION ---
+                                    // --- REPLACEMENT QUESTIONS: GROUPED DATA, ANOVA & REGRESSION ---
 
             { 
                 q: "The table below shows the frequency distribution of scores for 106 students: <br>Score: 0-10, 10-20, 20-30, 30-40, 40-50, 50-60, 60-70 <br>Freq: 1, 3, 5, 18, 33, 25, 21. <br>Find the mean of the data.", 
@@ -282,7 +282,6 @@
                 tag: "[Exam 2018/19 | Grouped Data]", 
                 exp: "Median = L_m + [((N/2) - CF_b) / f_m] &times; c = 29.5 + [((50) - 43) / 27] &times; 10 = 29.5 + (7/27) &times; 10 = 29.5 + 2.59 = 32.09." 
             },
-            
 
             // --- SECTION 2: HEAVY ANOVA & REGRESSION CALCULATIONS ---
             { q: "A microwave drying experiment tested 3 Banana Cultivars with 5 fibres each. Cultivar sums are 187.3, 123.6, and 115.6. The Total Sum of Squares (SST) was calculated as 627.49. Calculate the Treatment Sum of Squares.", opts: ["617.51", "308.75", "9.99", "1027.32"], ans: 0, tag: "[Calculation | ANOVA Cultivars]", exp: "SS_Trt = [(187.3&sup2; + 123.6&sup2; + 115.6&sup2;) / 5] - CF. Grand total = 426.5. CF = 426.5&sup2; / 15 = 12126.82. SS_Trt = 12744.32 - 12126.82 = 617.51." },
