@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: Probability Distributions</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --warning-color: #e74c3c;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .formula-box {
+            background-color: #fdfbf7;
+            border: 1px solid #e1d8c1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            color: #8a6d3b;
+        }
+
+        .hint-box {
+            background-color: #ffeaea;
+            border-left: 4px solid var(--warning-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .proof-box {
+            background-color: #eafaf1;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics by O'yemi</h1>
+        <p>Comprehensive Summary, Hints, & Practice</p>
+    </header>
+
+    <nav>
+        <a href="page1.html">1. Intro to Statistics</a>
+        <a href="page2.html">2. Central Tendency & Dispersion</a>
+        <a href="page3.html" class="active">3. Probability Distributions</a>
+        <a href="page4.html">4. Correlation & Regression</a>
+        <a href="page5.html">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>Discrete Random Variables</h2>
+            <p>A discrete random variable X takes on a countable number of distinct values. The probability distribution function (pdf) or probability mass function assigns a probability P(X=x) to each possible value.</p>
+            
+            <h3>Core Property</h3>
+            <p>The sum of all probabilities in a valid distribution must equal exactly 1.</p>
+            <div class="formula-box">&Sigma; P(X = x) = 1</div>
+            
+            <div class="hint-box">
+                <strong>Exam Hint: Finding Constants!</strong><br>
+                If an exam question gives you a pdf like <em>P(X = x) = a(3/4)<sup>x</sup></em> and asks you to find 'a', simply set up the equation to sum to 1. This often forms an infinite geometric progression where S<sub>&infin;</sub> = a / (1 - r).
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Expectations and Variances</h2>
+            <p>The "Expected Value" is the long-run average of the random variable. It is synonymous with the Mean (&mu;).</p>
+            
+            <h3>1. Expected Value, E(X)</h3>
+            <div class="formula-box">E(X) = &Sigma; [x &times; P(X = x)]</div>
+            <p><strong>Properties of Expectation:</strong></p>
+            <ul>
+                <li>E(c) = c <em>(The expectation of a constant is the constant itself)</em></li>
+                <li>E(cX) = c &times; E(X)</li>
+                <li>E(cX + b) = c &times; E(X) + b</li>
+                <li>E(X&sup2;) = &Sigma; [x&sup2; &times; P(X = x)]</li>
+            </ul>
+
+            <h3>2. Variance, Var(X)</h3>
+            <p>Variance measures the spread of the random variable around its expected value.</p>
+            <div class="formula-box">Var(X) = E(X&sup2;) - [E(X)]&sup2;</div>
+            <p><strong>Properties of Variance:</strong></p>
+            <ul>
+                <li>Var(c) = 0 <em>(A constant does not vary!)</em></li>
+                <li>Var(cX) = c&sup2; &times; Var(X) <em>(Constants pulled out of variance are squared)</em></li>
+                <li>Var(cX + b) = c&sup2; &times; Var(X) <em>(Adding a constant shifts the distribution but doesn't change its spread)</em></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>The Binomial Distribution</h2>
+            <p>Used when there are a fixed number of independent trials (n), and each trial has only two possible outcomes: Success (p) or Failure (q). Note that p + q = 1.</p>
+            
+            <div class="formula-box">P(X = x) = <sup>n</sup>C<sub>x</sub> &times; p<sup>x</sup> &times; q<sup>n-x</sup></div>
+            
+            <ul>
+                <li><strong>Mean (&mu;):</strong> E(X) = np</li>
+                <li><strong>Variance (&sigma;&sup2;):</strong> Var(X) = npq</li>
+                <li><strong>Standard Deviation (&sigma;):</strong> SD = &radic;(npq)</li>
+            </ul>
+
+            <div class="proof-box">
+                <strong>AGE 301 Frequent Proofs:</strong><br>
+                You are often asked to prove properties of the Binomial random variable. Remember these established identities:<br>
+                1. <strong>E[X&sup2;] = npq + &mu;&sup2;</strong><br>
+                2. <strong>E[X(X-1)] = npq + &mu;&sup2; - &mu;</strong> (Because E[X(X-1)] = E[X&sup2; - X] = E[X&sup2;] - E[X])
+            </div>
+            
+            <div class="hint-box">
+                <strong>Exam Hint: "At Most" and "At Least"</strong><br>
+                - "At most 2" means P(X &le; 2) = P(0) + P(1) + P(2).<br>
+                - "At least 3" means P(X &ge; 3). If n=5, this is P(3) + P(4) + P(5). Or use the complement: 1 - [P(0) + P(1) + P(2)].
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>The Poisson Distribution</h2>
+            <p>Used for modeling the number of times an event occurs in an interval of time or space. It is also used as an approximation to the Binomial distribution when <em>n</em> is very large and <em>p</em> is very small (where &lambda; = np).</p>
+            
+            <div class="formula-box">P(X = x) = (e<sup>-&lambda;</sup> &times; &lambda;<sup>x</sup>) / x!</div>
+            
+            <ul>
+                <li><strong>Mean (&mu;):</strong> E(X) = &lambda;</li>
+                <li><strong>Variance (&sigma;&sup2;):</strong> Var(X) = &lambda;</li>
+            </ul>
+            <p><em>(Notice that in a Poisson distribution, the mean and variance are equal!)</em></p>
+
+            <h3>Conditions for using Poisson Distribution:</h3>
+            <p><em>(Frequently asked theory question worth 4 marks)</em></p>
+            <ol>
+                <li>The events occur randomly and independently of one another.</li>
+                <li>The average rate (mean) of occurrence (&lambda;) over a given interval is known and constant.</li>
+                <li>Two events cannot occur at exactly the same instant.</li>
+                <li>The probability of an event occurring in a small interval is proportional to the length of the interval.</li>
+            </ol>
+
+            <h3>Applications of the Poisson Model:</h3>
+            <ul>
+                <li>Modeling the number of misprints on a page of a book.</li>
+                <li>Predicting the number of machine breakdowns in a factory during a specific shift.</li>
+                <li>Estimating the number of customers arriving at a service counter per hour.</li>
+                <li>Counting the number of defects found in a continuous length of manufactured wire.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students | Engineered by O'yemi (07050376975)| AGE 301 Survival Guide</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; color: #bdc3c7;">Curated and Developed by <strong>Abideen Yakub O'yemi (07050376975)</strong></p>
+    </footer>
+
+</body>
+</html>
