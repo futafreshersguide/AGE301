@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: Central Tendency & Dispersion</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --warning-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .formula-box {
+            background-color: #fdfbf7;
+            border: 1px solid #e1d8c1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            color: #8a6d3b;
+        }
+
+        .hint-box {
+            background-color: #ffeaea;
+            border-left: 4px solid var(--warning-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .hint-box strong {
+            color: var(--warning-color);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics by O'yemi</h1>
+        <p>Comprehensive Summary, Hints, & Practice</p>
+    </header>
+
+    <nav>
+        <a href="page1.html">1. Intro to Statistics</a>
+        <a href="page2.html" class="active">2. Central Tendency & Dispersion</a>
+        <a href="page3.html">3. Probability Distributions</a>
+        <a href="page4.html">4. Correlation & Regression</a>
+        <a href="page5.html">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>Measures of Central Tendency</h2>
+            <p>Central tendency describes the "center" or "typical" value of a dataset. The three main measures are the Mean, Median, and Mode.</p>
+            
+            <h3>1. The Mean (Arithmetic Average)</h3>
+            <p>The sum of all values divided by the number of values. It is highly affected by outliers.</p>
+            <ul>
+                <li><strong>Ungrouped Data:</strong> <div class="formula-box">x̄ = (&Sigma;x) / n</div></li>
+                <li><strong>Grouped Data:</strong> <div class="formula-box">x̄ = (&Sigma;fx) / (&Sigma;f)</div> <em>Where x is the class midpoint.</em></li>
+                <li><strong>Assumed Mean Method (Shortcut):</strong> <div class="formula-box">x̄ = A + [(&Sigma;fu) / &Sigma;f] &times; c</div>
+                    <em>Where A = Assumed mean, u = (x - A)/c, and c = class width.</em>
+                </li>
+            </ul>
+
+            <h3>2. The Median</h3>
+            <p>The exact middle value when data is arranged in ascending or descending order. It divides the distribution into two equal halves.</p>
+            <ul>
+                <li><strong>Ungrouped Data:</strong> If <em>n</em> is odd, it's the middle term. If <em>n</em> is even, it's the average of the two middle terms.</li>
+                <li><strong>Grouped Data:</strong> First, find the median class where the cumulative frequency (N/2) falls.
+                    <div class="formula-box">Median = L<sub>m</sub> + [ ( (N/2) - CF<sub>b</sub> ) / f<sub>m</sub> ] &times; c</div>
+                    <em>Where: <br>
+                    L<sub>m</sub> = Lower class boundary of the median class<br>
+                    N = Total frequency (&Sigma;f)<br>
+                    CF<sub>b</sub> = Cumulative frequency strictly <strong>before</strong> the median class<br>
+                    f<sub>m</sub> = Frequency of the median class<br>
+                    c = Class width</em>
+                </li>
+            </ul>
+
+            <h3>3. The Mode</h3>
+            <p>The value that appears most frequently in a dataset.</p>
+            <ul>
+                <li><strong>Ungrouped Data:</strong> Simply count which number appears the most.</li>
+                <li><strong>Grouped Data:</strong> First, identify the modal class (the class with the highest frequency).
+                    <div class="formula-box">Mode = L<sub>mo</sub> + [ &Delta;<sub>1</sub> / (&Delta;<sub>1</sub> + &Delta;<sub>2</sub>) ] &times; c</div>
+                    <em>Where: <br>
+                    L<sub>mo</sub> = Lower class boundary of the modal class<br>
+                    &Delta;<sub>1</sub> = Frequency of modal class minus frequency of the class <strong>before</strong> it<br>
+                    &Delta;<sub>2</sub> = Frequency of modal class minus frequency of the class <strong>after</strong> it<br>
+                    c = Class width</em>
+                </li>
+            </ul>
+
+            <div class="hint-box">
+                <strong>AGE 301 Exam Hint: Class Limits vs. Boundaries!</strong><br>
+                If your table gives intervals like <em>45-54, 55-64</em>, there is a gap. You MUST use boundaries (e.g., <em>44.5-54.5, 54.5-64.5</em>) for calculating L<sub>m</sub>, L<sub>mo</sub>, and the class width (c). In this example, c = 54.5 - 44.5 = 10, NOT 9!
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Measures of Dispersion (Spread)</h2>
+            <p>Dispersion tells us how scattered or spread out the data points are around the center. A small dispersion means the data is tightly clustered; a large dispersion means it is widely spread.</p>
+
+            <h3>1. Mean Deviation</h3>
+            <p>The average of the absolute differences between each data point and the mean.</p>
+            <ul>
+                <li><strong>Ungrouped Data:</strong> <div class="formula-box">MD = &Sigma;|x - x̄| / n</div></li>
+                <li><strong>Grouped Data:</strong> <div class="formula-box">MD = &Sigma;f|x - x̄| / &Sigma;f</div></li>
+            </ul>
+
+            <h3>2. Variance (s&sup2; or &sigma;&sup2;)</h3>
+            <p>The average of the squared differences from the mean.</p>
+            <ul>
+                <li><strong>Ungrouped Data:</strong> <div class="formula-box">Variance = &Sigma;(x - x̄)&sup2; / n</div></li>
+                <li><strong>Grouped Data (Standard Formula):</strong> <div class="formula-box">Variance = &Sigma;f(x - x̄)&sup2; / &Sigma;f</div></li>
+                <li><strong>Grouped Data (Shortcut Formula - Recommended!):</strong> <div class="formula-box">Variance = [ &Sigma;fx&sup2; / N ] - (x̄)&sup2;</div>
+                    <em>Where N = &Sigma;f. This shortcut saves you from dealing with messy decimals in the (x - x̄) column.</em>
+                </li>
+            </ul>
+
+            <h3>3. Standard Deviation (s or &sigma;)</h3>
+            <p>The square root of the variance. It is the most widely used measure of spread because it brings the units back to the original units of the data.</p>
+            <div class="formula-box">SD = &radic;(Variance)</div>
+            
+            <div class="hint-box">
+                <strong>AGE 301 Exam Hint: &Sigma;fx&sup2; vs (&Sigma;fx)&sup2;</strong><br>
+                Do not confuse these two! <br>
+                - <strong>&Sigma;fx&sup2;</strong> means you square the x value first, then multiply by f, then sum them up.<br>
+                - <strong>(&Sigma;fx)&sup2;</strong> means you sum the fx column first, and then square the final total. <br>
+                Using the shortcut variance formula carefully will save you serious time in the exam hall!
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students \ Engineered by O'yemi| AGE 301 Survival Guide</p>
+    </footer>
+
+</body>
+</html>
