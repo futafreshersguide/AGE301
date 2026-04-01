@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: CBT Simulator & Past Questions</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --tag-color: #e67e22;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; }
+        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+
+        /* CBT Styles */
+        #quiz-container { margin-top: 20px; }
+        
+        .question-block {
+            background-color: #f9fbff;
+            border: 1px solid #dce4f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .q-tag {
+            display: inline-block;
+            background-color: var(--tag-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .options label {
+            display: block;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .options label:hover { background-color: #f1f1f1; }
+        input[type="radio"] { margin-right: 10px; }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 400px;
+            font-weight: bold;
+        }
+        .submit-btn:hover { background-color: #2980b9; }
+
+        #result-box {
+            display: none;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            position: sticky;
+            bottom: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .pass { background-color: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
+        .fail { background-color: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            display: none;
+        }
+        .correct-exp { background-color: #eafaf1; border-left: 4px solid var(--success-color); }
+        .wrong-exp { background-color: #ffeaea; border-left: 4px solid var(--error-color); }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics</h1>
+        <p>O'YEMI'S CBT Simulator</p>
+    </header>
+
+    <nav>
+        <a href="page1.html">1. Intro to Statistics</a>
+        <a href="page2.html">2. Central Tendency & Dispersion</a>
+        <a href="page3.html">3. Probability Distributions</a>
+        <a href="page4.html">4. Correlation & Regression</a>
+        <a href="page5.html">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html" class="active">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>AGE 301 Master CBT (50 Questions)</h2>
+            <p>Welcome to the Master CBT! These 50 questions are compiled directly from AGE 301 past exams (2014-2025) and mandatory assignments. The most frequently repeated concepts are at the top. Select your answers and hit submit at the bottom!</p>
+            
+            <form id="quizForm">
+                <div id="quiz-container">
+                    <!-- Questions will be injected here by JavaScript -->
+                </div>
+                <button type="button" class="submit-btn" onclick="calculateScore()">Submit & Grade Simulator</button>
+            </form>
+
+            <div id="result-box"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students | AGE 301 Survival Guide</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; color: #bdc3c7;">Curated and Developed by <strong>Abideen Yakub O'yemi (07050376975) | Genius Point Academy</strong></p>
+    </footer>
+
+    <script>
+        // Database of 50 Past Questions
+        const questionsData = [
+            // HIGHLY FREQUENT (Appeared in Multiple Years + Assignments)
+            {
+                q: "The probability density function (pdf) of a discrete random variable is given by P(X = x) = a(3/4)<sup>x</sup> for x = 0, 1, 2, 3... Find the value of the constant, a.",
+                opts: ["3/4", "1/3", "1/4", "4/3"],
+                ans: 2,
+                tag: "[Exam 2024/25, 2022/23 & Assgt | Highly Frequent]",
+                exp: "Sum of probabilities equals 1. Using geometric sum formula S_&infin; = a / (1 - r) => a / (1 - 3/4) = 1 => a/(1/4) = 1 => a = 1/4."
+            },
+            {
+                q: "If 20% of bolts produced by a machine are defective, determine the probability that out of 4 bolts chosen at random, exactly 1 will be defective.",
+                opts: ["0.1536", "0.4096", "0.9728", "0.0819"],
+                ans: 1,
+                tag: "[Exam 2015/16, 2014/15 & Assgt | Highly Frequent]",
+                exp: "Binomial: p = 0.2, q = 0.8, n = 4. P(X=1) = 4C1 &times; (0.2)&sup1; &times; (0.8)&sup3; = 0.4096."
+            },
+            {
+                q: "Differentiate between a 'Statistic' and 'Statistics'. Which statement is correct?",
+                opts: ["A statistic is a sample measurement; statistics is the science of data.", "They mean the exact same thing.", "Statistics applies to grouped data; statistic to ungrouped.", "A statistic is a population parameter."],
+                ans: 0,
+                tag: "[Exam 2018/19, 2015/16, 2014/15 | Frequent Theory]",
+                exp: "Statistics is the field/discipline. A statistic is a single value derived from a sample (e.g., sample mean)."
+            },
+            {
+                q: "Two discs are drawn without replacement from a box containing 3 red and 4 white discs. If X is the number of white discs, what is P(X=0)?",
+                opts: ["1/7", "2/7", "4/7", "12/42"],
+                ans: 0,
+                tag: "[Exam 2022/23 & Assgt | Frequent]",
+                exp: "P(Red, Red) = (3/7) &times; (2/6) = 6/42 = 1/7."
+            },
+            {
+                q: "Suppose 300 misprints are distributed randomly throughout a book of 500 pages. Find the probability that a given page contains exactly 2 misprints.",
+                opts: ["0.3293", "0.5488", "0.0988", "0.1219"],
+                ans: 2,
+                tag: "[Exam 2022/23, 2015/16 | Frequent]",
+                exp: "Poisson: &lambda; = 300/500 = 0.6. P(X=2) = (e&circ;-0.6 &times; 0.6&sup2;) / 2! = 0.0988."
+            },
+            {
+                q: "On the basis of past experience, the probability that an electrical component is satisfactory is 0.98. In a sample of 5, what is the probability of 0 defectives?",
+                opts: ["0.0922", "0.9039", "0.0038", "0.0001"],
+                ans: 1,
+                tag: "[Exam 2024/25 & Assgt | Frequent]",
+                exp: "Defective rate p = 0.02. P(X=0) = 5C0 &times; (0.02)&#8304; &times; (0.98)&#8309; = 0.9039."
+            },
+            {
+                q: "A fair coin is tossed 5 times. What is the probability of obtaining exactly 3 heads?",
+                opts: ["0.1563", "0.3125", "0.5000", "0.0313"],
+                ans: 1,
+                tag: "[Exam 2018/19, 2015/16, 2014/15 | Frequent]",
+                exp: "Binomial: n=5, p=0.5. P(X=3) = 5C3 &times; (0.5)&sup3; &times; (0.5)&sup2; = 10 &times; 0.03125 = 0.3125."
+            },
+            {
+                q: "Which of the following is NOT a condition for using the Poisson Distribution?",
+                opts: ["Events occur independently.", "The mean rate of occurrence is constant.", "There are a fixed number of trials (n).", "Two events cannot occur at the exact same instant."],
+                ans: 2,
+                tag: "[Exam 2018/19, 2015/16, 2014/15 | Theory]",
+                exp: "A fixed number of trials (n) is a condition for the BINOMIAL distribution, not Poisson."
+            },
+            {
+                q: "For a binomial random variable, the expected value of X&sup2;, E[X&sup2;], is proven to be equal to:",
+                opts: ["npq", "npq + &mu;", "npq + &mu;&sup2;", "npq - &mu;&sup2;"],
+                ans: 2,
+                tag: "[Exam 2018/19, 2014/15 | Proof]",
+                exp: "Since Var(X) = E[X&sup2;] - &mu;&sup2;, and Var(X) = npq, rearranging gives E[X&sup2;] = npq + &mu;&sup2;."
+            },
+            {
+                q: "A laboratory technician measures breaking strength. The ANOVA table shows Treatment SS = 70.173 (DF=4) and Error SS = 25.315 (DF=12). What is the F-calculated value for treatments?",
+                opts: ["0.36", "8.316", "2.77", "11.10"],
+                ans: 1,
+                tag: "[Exam 2018/19, 2015/16, 2014/15 | ANOVA]",
+                exp: "MS_Trt = 70.173/4 = 17.543. MS_Err = 25.315/12 = 2.110. F = 17.543 / 2.110 = 8.316."
+            },
+
+            // PROBABILITY & EXPECTATIONS
+            { q: "A random variable X has Var(X) = 0.84. What is the variance of (3X - 4)?", opts: ["2.52", "3.56", "7.56", "1.16"], ans: 2, tag: "[Exam 2022/23]", exp: "Var(aX + b) = a&sup2;Var(X). Var(3X - 4) = 3&sup2;(0.84) = 9(0.84) = 7.56." },
+            { q: "If E(X) = 2.4, what is the value of E(3X + 4)?", opts: ["11.2", "7.2", "13.6", "10.0"], ans: 0, tag: "[Exam 2018/19]", exp: "E(aX + b) = aE(X) + b. 3(2.4) + 4 = 7.2 + 4 = 11.2." },
+            { q: "Two tetrahedral dice (faces 1,2,3,4) are thrown. What is the probability the sum is exactly 5?", opts: ["1/16", "1/8", "3/16", "1/4"], ans: 3, tag: "[Exam 2024/25, 2022/23]", exp: "Outcomes for 5: (1,4), (4,1), (2,3), (3,2). Total outcomes = 16. Prob = 4/16 = 1/4." },
+            { q: "From a box of 3 red and 4 white discs, two are drawn. Expected number of white discs E(X) is?", opts: ["4/7", "8/7", "12/7", "1.0"], ans: 1, tag: "[Exam 2022/23 & Assgt]", exp: "E(X) = 0(1/7) + 1(4/7) + 2(2/7) = 8/7." },
+            { q: "A fair die is thrown 5 times. Probability that a factor of 6 appears exactly 3 times?", opts: ["80/243", "40/243", "160/243", "20/243"], ans: 0, tag: "[Exam 2020/21]", exp: "Factors of 6: {1,2,3,6}. p = 4/6 = 2/3. P(X=3) = 5C3 &times; (2/3)&sup3; &times; (1/3)&sup2; = 10(8/27)(1/9) = 80/243." },
+            { q: "Probability of 2 or more misprints on a page, given an average of 0.6 misprints/page?", opts: ["0.0988", "0.8781", "0.1219", "0.4512"], ans: 2, tag: "[Exam 2022/23]", exp: "P(X &ge; 2) = 1 - [P(0) + P(1)] = 1 - [0.5488 + 0.3293] = 0.1219." },
+            { q: "A company drills 4 oil wells (success p=0.40). What is the expected number of successes?", opts: ["0.4", "1.6", "2.0", "4.0"], ans: 1, tag: "[Exam 2024/25]", exp: "For binomial, Expected Value = np. E(X) = 4 &times; 0.40 = 1.6." },
+            { q: "Using the same oil wells (p=0.4, n=4), what is the probability of ONE OR MORE successful wells?", opts: ["0.1296", "0.3456", "0.8704", "0.4752"], ans: 2, tag: "[Exam 2024/25]", exp: "P(X &ge; 1) = 1 - P(0). P(0) = 4C0(0.4)&#8304;(0.6)&#8308; = 0.1296. 1 - 0.1296 = 0.8704." },
+            { q: "An unbiased die is thrown once. What is the probability of obtaining a multiple of 3?", opts: ["1/6", "1/3", "1/2", "2/3"], ans: 1, tag: "[Assignment Question]", exp: "Multiples of 3 on a die: {3, 6}. Probability = 2/6 = 1/3." },
+            { q: "The sum of all probabilities in a discrete probability distribution must always equal:", opts: ["0", "0.5", "1", "100"], ans: 2, tag: "[General Rule]", exp: "By definition, the sum of P(X=x) over all x in the sample space is exactly 1." },
+
+            // ANOVA & REGRESSION
+            { q: "In an ANOVA table, what is the formula for the Correction Factor (CF)?", opts: ["(&Sigma;X)&sup2; / N", "&Sigma;(X&sup2;) / N", "(&Sigma;X) / N&sup2;", "G / N&sup2;"], ans: 0, tag: "[ANOVA Concept]", exp: "CF is the Grand Total squared, divided by total observations (G&sup2; / N)." },
+            { q: "In an experiment with 'k' treatments and 'N' total observations, what are the degrees of freedom for the Error term?", opts: ["k - 1", "N - 1", "N - k", "k(N - 1)"], ans: 2, tag: "[ANOVA Concept]", exp: "DF_Total = N-1. DF_Trt = k-1. DF_Error = (N-1) - (k-1) = N - k." },
+            { q: "In Simple Linear Regression (Y = a + bX), what does the coefficient 'a' represent?", opts: ["The Slope", "The Y-Intercept", "The Correlation Coefficient", "The Error term"], ans: 1, tag: "[Regression Concept]", exp: "'a' is the y-intercept, the value of Y when X is 0." },
+            { q: "Which regression approach utilizes the formula B = (X^T X)^-1 X^T Y?", opts: ["Statistical Approach", "Simultaneous Equation Approach", "Matrix Approach", "Correlation Approach"], ans: 2, tag: "[Regression Concept]", exp: "This is the Matrix formulation for multiple linear regression." },
+            { q: "If the Pearson Correlation Coefficient (r) is 0.90, what percentage of the variance in Y is explained by X?", opts: ["90%", "81%", "9%", "100%"], ans: 1, tag: "[Correlation Concept]", exp: "Coefficient of determination (r&sup2;) = 0.90&sup2; = 0.81, which is 81%." },
+            { q: "If your Calculated F-value in ANOVA is greater than the Tabulated F-value, what is the correct conclusion?", opts: ["Accept Null Hypothesis", "Reject Null Hypothesis", "Recalculate the Error SS", "Treatments are equal"], ans: 1, tag: "[ANOVA Rule]", exp: "If F_calc > F_tab, we reject H_0 and conclude a significant difference exists." },
+            { q: "In the regression formula b = SS_XY / SS_XX, what does SS_XX represent?", opts: ["&Sigma;X&sup2;", "(&Sigma;X)&sup2;", "&Sigma;(X - X&#772;)&sup2;", "&Sigma;XY"], ans: 2, tag: "[Regression Concept]", exp: "SS_XX represents the sum of squared deviations of X from its mean, &Sigma;x&sup2;." },
+            { q: "A study has 4 machines with 6 observations each. What is the Total Degree of Freedom for the ANOVA?", opts: ["3", "20", "23", "24"], ans: 2, tag: "[Exam 2020/21]", exp: "Total observations N = 4 &times; 6 = 24. Total DF = N - 1 = 23." },
+            { q: "The production volume (V) vs Cost (C) regression gives equation: C = 60 + 5V. What is the estimated cost for 500 units?", opts: ["560", "2560", "3060", "2500"], ans: 1, tag: "[Exam 2015/16]", exp: "C = 60 + 5(500) = 60 + 2500 = 2560." },
+            { q: "In the same equation (C = 60 + 5V), what is the variable cost per unit?", opts: ["60", "65", "5", "55"], ans: 2, tag: "[Exam 2015/16]", exp: "The variable cost is represented by the slope, which is 5." },
+
+            // CENTRAL TENDENCY, DISPERSION, & GROUPED DATA
+            { q: "For a grouped data frequency table, what does L_mo represent in the Mode formula?", opts: ["Limit of the median class", "Lower class boundary of modal class", "Lowest frequency", "Length of the class"], ans: 1, tag: "[Grouped Data Concept]", exp: "L_mo is the Lower Class Boundary (not limit!) of the modal class." },
+            { q: "If a dataset has variance = 8.507, what is its standard deviation?", opts: ["72.37", "4.25", "2.92", "17.01"], ans: 2, tag: "[Exam 2015/16]", exp: "Standard Deviation = &radic;Variance = &radic;8.507 &approx; 2.92." },
+            { q: "The mean of a set of 10 numbers is 29, and the sum of their squares (&Sigma;x&sup2;) is 8469. Find the variance.", opts: ["5.9", "846.9", "8.4", "59.0"], ans: 0, tag: "[Exam 2014/15 & Assgt]", exp: "Var = (&Sigma;x&sup2;/n) - (mean)&sup2; = (8469/10) - 29&sup2; = 846.9 - 841 = 5.9." },
+            { q: "Ade's average for his first four tests is 68. He needs an average of 70 across five tests. What is the lowest mark he can get on the 5th test?", opts: ["72", "78", "80", "70"], ans: 1, tag: "[Assignment Question]", exp: "Current total = 68 &times; 4 = 272. Target total = 70 &times; 5 = 350. Needed = 350 - 272 = 78." },
+            { q: "A set of four numbers {2, 3, 6, 9} has two numbers 'a' and 'b' added. The new mean is 6. What is a + b?", opts: ["16", "20", "12", "18"], ans: 0, tag: "[Assignment Question]", exp: "Old sum = 20. New sum = 6 &times; 6 = 36. Therefore, a + b = 36 - 20 = 16." },
+            { q: "If a constant 'c' is multiplied to every value in a dataset, what happens to the standard deviation?", opts: ["It is multiplied by c", "It is multiplied by c&sup2;", "It remains unchanged", "It increases by c"], ans: 0, tag: "[Dispersion Concept]", exp: "Var(cX) = c&sup2;Var(X), so SD(cX) = c &times; SD(X)." },
+            { q: "Which of the following is highly sensitive to extreme outliers?", opts: ["Median", "Mode", "Mean", "Interquartile Range"], ans: 2, tag: "[Theory]", exp: "The mean takes every value into account, making it easily skewed by extreme outliers." },
+            { q: "Given factory product weights: 45-54(1), 55-64(3), 65-74(5), 75-84(18), 85-94(33), 95-104(25)... What is the modal class boundary?", opts: ["85 - 94", "84.5 - 94.5", "94.5 - 104.5", "74.5 - 84.5"], ans: 1, tag: "[Exam 2024/25]", exp: "Highest freq is 33 in class 85-94. The continuous boundary is 84.5 - 94.5." },
+            { q: "From the housing estate data (N=50), 35 residents are less than 31 years old. What is the probability a random resident is less than 31?", opts: ["0.35", "0.70", "0.50", "0.65"], ans: 1, tag: "[Exam 2024/25, 2020/21]", exp: "P = Favorable / Total = 35 / 50 = 0.70." },
+            { q: "Eighty bags of salt have an assumed mean of 25kg. If &Sigma;(x-25) = 27.2, what is the actual mean weight?", opts: ["25.00", "25.34", "27.20", "0.34"], ans: 1, tag: "[Assignment Question]", exp: "Actual mean = Assumed Mean + (&Sigma;d / N) = 25 + (27.2 / 80) = 25 + 0.34 = 25.34." },
+
+            // MISC & MORE THEORY
+            { q: "What is the total sum of probabilities of mutually exclusive and exhaustive events?", opts: ["0", "0.5", "1.0", "Depends on n"], ans: 2, tag: "[Probability Rule]", exp: "Exhaustive events cover the entire sample space, so their probabilities sum to 1." },
+            { q: "Which data presentation method uses a circle divided into sectors proportional to relative frequencies?", opts: ["Histogram", "Ogive", "Pie Chart", "Scatter Diagram"], ans: 2, tag: "[Data Presentation]", exp: "A Pie Chart uses sectors of a circle (degrees) to show proportions." },
+            { q: "For a standard normal distribution (Z), the mean and standard deviation are respectively:", opts: ["1 and 0", "0 and 1", "0 and 0", "Depends on sample size"], ans: 1, tag: "[Normal Dist]", exp: "A standard normal distribution always has &mu; = 0 and &sigma; = 1." },
+            { q: "A sample of 100 students shows 55% in favour. Standard Error is ~0.0497. What is the upper 95% confidence limit (Z=1.96)?", opts: ["64.75%", "69.93%", "55.00%", "45.25%"], ans: 0, tag: "[Exam 2022/23]", exp: "Upper limit = 0.55 + 1.96(0.0497) = 0.55 + 0.0974 = 0.6474 (64.75%)." },
+            { q: "What does an Ogive specifically help estimate in statistics?", opts: ["Mean and Mode", "Median and Quartiles", "Variance", "Correlation"], ans: 1, tag: "[Data Presentation]", exp: "An ogive (cumulative frequency curve) is used to find median, quartiles, and deciles." },
+            { q: "If the calculated Pearson's first coefficient of skewness is +0.328, the distribution is:", opts: ["Symmetrical", "Negatively Skewed", "Positively Skewed", "Uniform"], ans: 2, tag: "[Exam 2018/19]", exp: "A positive coefficient means the tail extends to the right (positively skewed)." },
+            { q: "In the regression normal equation: nb_0 + b_1&Sigma;X = &Sigma;Y, what does 'n' stand for?", opts: ["Number of variables", "Total sum", "Number of data points/observations", "Degrees of freedom"], ans: 2, tag: "[Regression Formula]", exp: "In simultaneous regression equations, 'n' is the number of paired observations." },
+            { q: "Which of the following distributions is CONTINUOUS?", opts: ["Binomial", "Poisson", "Normal", "Geometric"], ans: 2, tag: "[Probability Concept]", exp: "Binomial and Poisson count discrete items. Normal measures continuous variables." },
+            { q: "When finding the median of grouped data, what does CF_b represent?", opts: ["Cum. freq. of the median class", "Cum. freq. before the median class", "Class boundary", "Correction factor"], ans: 1, tag: "[Grouped Data]", exp: "CF_b is the cumulative frequency of the class immediately preceding the median class." },
+            { q: "If P(A) = 3/10 and P(B) = 1/4 (mutually exclusive), what is P(A or B)?", opts: ["11/20", "3/40", "1/2", "0"], ans: 0, tag: "[Assignment Question]", exp: "For mutually exclusive events, P(A U B) = P(A) + P(B) = 3/10 + 1/4 = 6/20 + 5/20 = 11/20." }
+        ];
+
+        // Shuffle questions slightly for variety, but keep frequent ones generally at top
+        // (For this specific requested order, we will just render them as-is)
+        
+        function loadQuestions() {
+            const container = document.getElementById('quiz-container');
+            let html = '';
+
+            questionsData.forEach((q, index) => {
+                html += `
+                <div class="question-block">
+                    <span class="q-tag">${q.tag}</span>
+                    <div class="question-text">${index + 1}. ${q.q}</div>
+                    <div class="options">
+                        <label><input type="radio" name="q${index}" value="0"> A) ${q.opts[0]}</label>
+                        <label><input type="radio" name="q${index}" value="1"> B) ${q.opts[1]}</label>
+                        <label><input type="radio" name="q${index}" value="2"> C) ${q.opts[2]}</label>
+                        <label><input type="radio" name="q${index}" value="3"> D) ${q.opts[3]}</label>
+                    </div>
+                    <div class="explanation" id="exp-${index}">${q.exp}</div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function calculateScore() {
+            let score = 0;
+            let totalQuestions = questionsData.length;
+
+            questionsData.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const expBox = document.getElementById(`exp-${index}`);
+                
+                expBox.style.display = 'block'; // Show explanation
+
+                if (selected) {
+                    if (parseInt(selected.value) === q.ans) {
+                        score++;
+                        expBox.className = 'explanation correct-exp';
+                        expBox.innerHTML = `<strong>Correct!</strong> ${q.exp}`;
+                    } else {
+                        expBox.className = 'explanation wrong-exp';
+                        let correctLetter = ['A', 'B', 'C', 'D'][q.ans];
+                        expBox.innerHTML = `<strong>Wrong. The correct answer was ${correctLetter}.</strong><br>${q.exp}`;
+                    }
+                } else {
+                    expBox.className = 'explanation wrong-exp';
+                    let correctLetter = ['A', 'B', 'C', 'D'][q.ans];
+                    expBox.innerHTML = `<strong>No answer selected. The correct answer was ${correctLetter}.</strong><br>${q.exp}`;
+                }
+            });
+
+            // Display Score
+            const resultBox = document.getElementById('result-box');
+            resultBox.style.display = 'block';
+            let percentage = ((score / totalQuestions) * 100).toFixed(1);
+            
+            if (percentage >= 70) {
+                resultBox.className = 'pass';
+                resultBox.innerHTML = `GPA Star! You scored ${score}/${totalQuestions} (${percentage}%). You are ready to crush AGE 301!`;
+            } else if (percentage >= 50) {
+                resultBox.className = 'pass';
+                resultBox.style.backgroundColor = '#fff3cd';
+                resultBox.style.color = '#856404';
+                resultBox.innerHTML = `Good effort! You scored ${score}/${totalQuestions} (${percentage}%). Review the mistakes and try again.`;
+            } else {
+                resultBox.className = 'fail';
+                resultBox.innerHTML = `Keep Practicing! You scored ${score}/${totalQuestions} (${percentage}%). Don't give up, read the explanations!`;
+            }
+        }
+
+        // Initialize CBT on page load
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>
