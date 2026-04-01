@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE 301: Analysis of Variance (ANOVA)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --warning-color: #e74c3c;
+            --success-color: #27ae60;
+            --highlight-color: #8e44ad;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--highlight-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .formula-box {
+            background-color: #fdfbf7;
+            border: 1px solid #e1d8c1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            color: #8a6d3b;
+            overflow-x: auto;
+        }
+
+        .hint-box {
+            background-color: #ffeaea;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .step-box {
+            background-color: #f4f6f7;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AGE 301: Engineering Statistics</h1>
+        <p>Comprehensive Summary, Hints, & Practice</p>
+    </header>
+
+    <nav>
+        <a href="page1.html">1. Intro to Statistics</a>
+        <a href="page2.html">2. Central Tendency & Dispersion</a>
+        <a href="page3.html">3. Probability Distributions</a>
+        <a href="page4.html">4. Correlation & Regression</a>
+        <a href="page5.html" class="active">5. Analysis of Variance (ANOVA)</a>
+        <a href="page6.html">6. CBT Simulator & Past Questions</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>What is ANOVA?</h2>
+            <p>Analysis of Variance (ANOVA) is a statistical method used to test if there are significant differences between the means of <strong>three or more</strong> independent groups (treatments). If you only have two groups, you would use a t-test. For three or more, we use the F-test in ANOVA.</p>
+        </div>
+
+        <div class="card">
+            <h2>The Standard Class Procedure (Step-by-Step)</h2>
+            <p>To get full marks in an AGE 301 ANOVA question, follow this exact sequence of procedures:</p>
+
+            <div class="step-box">
+                <h3>Step 1: State the Hypothesis</h3>
+                <p>Always start by defining your Null (H<sub>0</sub>) and Alternative (H<sub>1</sub>) hypotheses.</p>
+                <ul>
+                    <li><strong>H<sub>0</sub>:</strong> &mu;<sub>1</sub> = &mu;<sub>2</sub> = &mu;<sub>3</sub> = ... = &mu;<sub>k</sub> (There is no significant difference between the treatment means).</li>
+                    <li><strong>H<sub>1</sub>:</strong> At least one treatment mean is significantly different.</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Step 2: Calculate the Mean and Totals of Each Treatment</h3>
+                <p>Before jumping into complex formulas, calculate the basic sums:</p>
+                <ul>
+                    <li>Find the sum of each treatment group (T<sub>1</sub>, T<sub>2</sub>, T<sub>3</sub>, etc.).</li>
+                    <li>Calculate the mean of each treatment (if requested).</li>
+                    <li>Find the <strong>Grand Total (G)</strong>: The sum of ALL observations in the experiment.</li>
+                    <li>Find the sum of all squared individual observations (&Sigma;X&sup2;).</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Step 3: The Correction Factor (CF)</h3>
+                <p>This is the anchor for all your Sum of Squares calculations. Do not round this number off too early!</p>
+                <div class="formula-box">CF = G&sup2; / N</div>
+                <p><em>Where G is the Grand Total and N is the total number of observations across all groups.</em></p>
+            </div>
+
+            <div class="step-box">
+                <h3>Step 4: Calculate the Sum of Squares (SS)</h3>
+                <p>You need to calculate three different sums of squares:</p>
+                <ul>
+                    <li><strong>Total Sum of Squares (SS<sub>Total</sub>):</strong> <br>
+                        <div class="formula-box">SS<sub>Total</sub> = &Sigma;X&sup2; - CF</div>
+                    </li>
+                    <li><strong>Treatment Sum of Squares (SS<sub>Treatment</sub>):</strong> <br>
+                        <div class="formula-box">SS<sub>Treatment</sub> = [ (&Sigma;T<sub>i</sub>&sup2;) / n ] - CF</div>
+                        <em>(Square each treatment total, add them up, divide by the number of observations in a single treatment 'n', then subtract CF).</em>
+                    </li>
+                    <li><strong>Error Sum of Squares (SS<sub>Error</sub>):</strong> <br>
+                        <div class="formula-box">SS<sub>Error</sub> = SS<sub>Total</sub> - SS<sub>Treatment</sub></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Step 5 & 6: Degrees of Freedom (DF) and Mean Squares (MS)</h3>
+                <p>Fill these directly into your ANOVA table. Mean Square is simply the Sum of Squares divided by its corresponding Degree of Freedom.</p>
+                <div class="formula-box">MS<sub>Treatment</sub> = SS<sub>Treatment</sub> / DF<sub>Treatment</sub></div>
+                <div class="formula-box">MS<sub>Error</sub> = SS<sub>Error</sub> / DF<sub>Error</sub></div>
+            </div>
+
+            <div class="step-box">
+                <h3>Step 7: The F-Calculated</h3>
+                <p>This is the final test statistic you are looking for.</p>
+                <div class="formula-box">F<sub>calc</sub> = MS<sub>Treatment</sub> / MS<sub>Error</sub></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>The ANOVA Table Structure</h2>
+            <p>Your final presentation should always look exactly like this:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source of Variation</th>
+                        <th>Sum of Squares (SS)</th>
+                        <th>Degree of Freedom (DF)</th>
+                        <th>Mean Square (MS)</th>
+                        <th>F-Calculated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Treatment</strong></td>
+                        <td>SS<sub>Treatment</sub></td>
+                        <td>k - 1</td>
+                        <td>MS<sub>Treatment</sub></td>
+                        <td>MS<sub>Trt</sub> / MS<sub>Err</sub></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error</strong></td>
+                        <td>SS<sub>Error</sub></td>
+                        <td>N - k</td>
+                        <td>MS<sub>Error</sub></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td>SS<sub>Total</sub></td>
+                        <td>N - 1</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Note: 'k' is the number of treatments, and 'N' is the total number of observations.</em></p>
+        </div>
+
+        <div class="card">
+            <h2>How to Look Up the F-Table and Make a Decision</h2>
+            <p>To know if your calculated F-value is significant, you must compare it to the Tabulated F-value from the statistical tables provided in the exam.</p>
+            
+            <ol>
+                <li><strong>Identify your Alpha (&alpha;):</strong> This is the significance level. Usually, it is 0.05 (5%) unless stated otherwise. Go to the page in your booklet for &alpha; = 0.05.</li>
+                <li><strong>Identify v<sub>1</sub> (Numerator DF):</strong> This is your <strong>DF<sub>Treatment</sub></strong> (k - 1). Look across the <em>top row</em> of the table for this number.</li>
+                <li><strong>Identify v<sub>2</sub> (Denominator DF):</strong> This is your <strong>DF<sub>Error</sub></strong> (N - k). Look down the <em>first column</em> on the left side of the table for this number.</li>
+                <li><strong>Find the Intersection:</strong> Where the v<sub>1</sub> column and v<sub>2</sub> row intersect is your <strong>F<sub>tabulated</sub></strong> (or F-critical).</li>
+            </ol>
+
+            <div class="hint-box">
+                <strong>The Golden Rule for the Conclusion:</strong><br>
+                If <strong>F<sub>calculated</sub> > F<sub>tabulated</sub></strong>, you <strong>REJECT</strong> the Null Hypothesis (H<sub>0</sub>) and conclude that there IS a significant difference between the treatments.<br><br>
+                If <strong>F<sub>calculated</sub> &le; F<sub>tabulated</sub></strong>, you <strong>ACCEPT</strong> (fail to reject) the Null Hypothesis and conclude that there is NO significant difference.
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Built for FUTA Engineering Students | AGE 301 Survival Guide</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; color: #bdc3c7;">Curated and Developed by <strong>Abideen Yakub O'yemi (07050376975)</strong></p>
+    </footer>
+
+</body>
+</html>
