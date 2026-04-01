@@ -224,6 +224,65 @@
             { q: "A company drills 4 oil wells. Prob of success is 0.40. Cost per well is $200k. Worth per success is $600k. What is the expected gain?", opts: ["$240,000", "$160,000", "-$200,000", "$960,000"], ans: 1, tag: "[Simulator 2024/25 | Expectations]", exp: "Expected successes = 4 &times; 0.4 = 1.6. Expected Revenue = 1.6 &times; $600k = $960k. Total Cost = $800k. Gain = 960k - 800k = $160,000." },
             { q: "Considering all possible results from the 4 oil wells, what is the probability of making a loss rather than a gain?", opts: ["0.1296", "0.8704", "0.4752", "0.3456"], ans: 2, tag: "[Simulator 2024/25 | Binomial]", exp: "A loss occurs if 0 or 1 well is successful (Revenue < 800k). P(X=0) + P(X=1) = 0.1296 + 0.3456 = 0.4752." },
             { q: "Two tetrahedral dice (faces 1, 2, 3, 4) are thrown. What is the probability density function value P(X=6)?", opts: ["1/8", "3/16", "1/4", "1/16"], ans: 1, tag: "[Simulator 2024/25 | Probability]", exp: "Outcomes for sum of 6: (2,4), (3,3), (4,2). Total outcomes = 16. P(X=6) = 3/16." },
+                        // --- REPLACEMENT QUESTIONS: GROUPED DATA, ANOVA & REGRESSION ---
+
+            { 
+                q: "The table below shows the frequency distribution of scores for 106 students: <br>Score: 0-10, 10-20, 20-30, 30-40, 40-50, 50-60, 60-70 <br>Freq: 1, 3, 5, 18, 33, 25, 21. <br>Find the mean of the data.", 
+                opts: ["45.50", "47.45", "42.50", "48.00"], 
+                ans: 1, 
+                tag: "[Exam 2024/25 | Grouped Data]", 
+                exp: "Mean = &Sigma;fx / &Sigma;f. The midpoints (x) are 5, 15, 25, 35, 45, 55, 65. &Sigma;fx = 5030. Mean = 5030 / 106 = 47.45." 
+            },
+            { 
+                q: "Using the same AGE 301 test data for the 106 students (Mean = 47.45), calculate the mean deviation.", 
+                opts: ["10.51", "12.45", "8.95", "11.02"], 
+                ans: 0, 
+                tag: "[Exam 2024/25 | Dispersion]", 
+                exp: "Mean Deviation = &Sigma;f|x - x&#772;| / &Sigma;f. The sum of f|x - x&#772;| is 1114.30. MD = 1114.30 / 106 = 10.51." 
+            },
+            { 
+                q: "Calculate the standard deviation of the following set of numbers: 3, 6, 7, 8, 14.", 
+                opts: ["3.66", "13.44", "2.55", "4.12"], 
+                ans: 0, 
+                tag: "[Assignment | Dispersion]", 
+                exp: "Mean = 38 / 5 = 7.6. Variance = &Sigma;(x - x&#772;)&sup2; / n = 67.2 / 5 = 13.44. Standard Deviation = &radic;13.44 &approx; 3.66." 
+            },
+            { 
+                q: "The elongation of a steel cable is tested against applied force:<br>Force (x): 1.0, 1.5, 2.0, 2.5, 3.0<br>Elongation (y): 3.0, 3.8, 5.4, 6.9, 8.4<br>Determine the slope (b) of the regression line.", 
+                opts: ["0.06", "2.50", "2.78", "3.15"], 
+                ans: 2, 
+                tag: "[Exam 2018/19 | Regression]", 
+                exp: "Slope (b) = SS_xy / SS_xx. SS_xy = 6.95, SS_xx = 2.5. b = 6.95 / 2.5 = 2.78." 
+            },
+            { 
+                q: "Using the steel cable data (Force vs. Elongation), what is the correct least squares regression model?", 
+                opts: ["Y = 2.78 - 0.06X", "Y = -0.06 + 2.78X", "Y = 0.06 + 2.78X", "Y = 2.78 + 0.06X"], 
+                ans: 1, 
+                tag: "[Exam 2018/19 | Regression]", 
+                exp: "Intercept (a) = y&#772; - bx&#772; = 5.5 - (2.78 &times; 2) = 5.5 - 5.56 = -0.06. The model is Y = a + bX, which is Y = -0.06 + 2.78X." 
+            },
+            { 
+                q: "A drying experiment tested the mechanical strength of 3 banana cultivars with 5 fibres each (N=15). The Treatment SS is 617.51 and the Total SS is 627.49. Calculate the Mean Square Error (MS_Error).", 
+                opts: ["308.75", "9.98", "0.832", "1.25"], 
+                ans: 2, 
+                tag: "[Exam 2022/23 | ANOVA]", 
+                exp: "Error SS = Total SS - Treatment SS = 627.49 - 617.51 = 9.98. Error DF = N - k = 15 - 3 = 12. MS_Error = 9.98 / 12 = 0.832." 
+            },
+            { 
+                q: "An electric cooker was switched on, and temperature (Y) was noted at 5-minute intervals (X). The regression model was calculated as Y = -0.142 + 0.389X. Predict the temperature at 28 minutes.", 
+                opts: ["11.50 &deg;C", "10.75 &deg;C", "12.05 &deg;C", "9.85 &deg;C"], 
+                ans: 1, 
+                tag: "[Exam 2014/15 | Regression]", 
+                exp: "Substitute X = 28 into the model: Y = -0.142 + 0.389(28) = -0.142 + 10.892 = 10.75 &deg;C." 
+            },
+            { 
+                q: "A sample of 100 Lathe machine downtimes yielded frequencies for class intervals of 10 (0-9, 10-19...): 5, 10, 28, 27, 12... The median class is 30-39 (CF before = 43, freq = 27). Calculate the median.", 
+                opts: ["34.70", "29.50", "32.09", "35.50"], 
+                ans: 2, 
+                tag: "[Exam 2018/19 | Grouped Data]", 
+                exp: "Median = L_m + [((N/2) - CF_b) / f_m] &times; c = 29.5 + [((50) - 43) / 27] &times; 10 = 29.5 + (7/27) &times; 10 = 29.5 + 2.59 = 32.09." 
+            },
+            
 
             // --- SECTION 2: HEAVY ANOVA & REGRESSION CALCULATIONS ---
             { q: "A microwave drying experiment tested 3 Banana Cultivars with 5 fibres each. Cultivar sums are 187.3, 123.6, and 115.6. The Total Sum of Squares (SST) was calculated as 627.49. Calculate the Treatment Sum of Squares.", opts: ["617.51", "308.75", "9.99", "1027.32"], ans: 0, tag: "[Calculation | ANOVA Cultivars]", exp: "SS_Trt = [(187.3&sup2; + 123.6&sup2; + 115.6&sup2;) / 5] - CF. Grand total = 426.5. CF = 426.5&sup2; / 15 = 12126.82. SS_Trt = 12744.32 - 12126.82 = 617.51." },
